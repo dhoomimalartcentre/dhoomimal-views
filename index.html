@@ -13,53 +13,49 @@
 :root{
   --bg:#fff;--bg2:#f8f7f4;--bg3:#f0efe9;
   --text:#1c1c1a;--text2:#6b6b66;--text3:#a0a09a;
-  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.16);
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.17);
   --red:#8b1f1f;--red-bg:#fceaea;
   --green:#0a5c3a;--green-bg:#e2f5ec;
   --blue:#0c447c;--blue-bg:#e6f0fb;
   --r:6px;--rl:10px;
 }
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
-.serif{font-family:'Cormorant Garamond',serif;}
-h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;}
 
-/* ── inputs & buttons ── */
+/* ── base elements ── */
 input,select,textarea,button{font-family:inherit;font-size:13px;outline:none;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);padding:8px 11px;transition:border-color .15s,background .15s;}
 input:focus,select:focus,textarea:focus{border-color:#888;}
 button{cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
 button:hover{background:var(--bg2);}
 button:active{transform:scale(.98);}
 a{color:inherit;text-decoration:none;}
-.page{max-width:1060px;margin:0 auto;padding:0 1.5rem 5rem;}
 
-/* ── login screen ── */
-#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--bg);}
-.login-box{width:100%;max-width:360px;text-align:center;padding:2rem;}
+/* ── login ── */
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-box{width:100%;max-width:340px;text-align:center;padding:2rem;}
 .login-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:.04em;margin-bottom:4px;}
 .login-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:2.5rem;}
-.login-box input{width:100%;text-align:center;font-size:14px;padding:10px;margin-bottom:12px;letter-spacing:.1em;}
-.login-box button{width:100%;justify-content:center;font-size:13px;padding:10px;letter-spacing:.06em;}
-.login-err{font-size:12px;color:var(--red);margin-top:8px;}
+.login-box input{width:100%;text-align:center;font-size:14px;padding:10px;margin-bottom:12px;letter-spacing:.08em;}
+.login-box .login-btn{width:100%;justify-content:center;padding:10px;letter-spacing:.05em;font-size:13px;}
+.login-err{font-size:12px;color:var(--red);margin-top:8px;min-height:18px;}
 
-/* ── admin header ── */
+/* ── admin layout ── */
+.page{max-width:1080px;margin:0 auto;padding:0 1.5rem 5rem;}
 .admin-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:.5px solid var(--border);margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;}
 .admin-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.03em;}
-.admin-right{display:flex;align-items:center;gap:8px;}
+.admin-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .badge{font-size:10px;padding:3px 9px;border:.5px solid var(--border);border-radius:var(--r);color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
-
-/* ── tabs ── */
 .tabs{display:flex;gap:2px;margin-bottom:1.5rem;}
-.tab{font-size:13px;padding:6px 16px;border-radius:var(--r);border:.5px solid transparent;font-weight:400;background:transparent;color:var(--text2);}
+.tab{font-size:13px;padding:6px 16px;border-radius:var(--r);border:.5px solid transparent;background:transparent;color:var(--text2);}
 .tab:hover{background:var(--bg2);border-color:var(--border);}
 .tab.active{font-weight:500;background:var(--bg2);border-color:var(--border2);color:var(--text);}
 
 /* ── sync bar ── */
 .sync-bar{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
-.sync-bar p{font-size:13px;margin:0;}
-.sync-bar .sync-title{font-weight:500;margin-bottom:2px;}
-.sync-bar .sync-sub{color:var(--text2);font-size:12px;}
+.sync-title{font-size:13px;font-weight:500;margin-bottom:2px;}
+.sync-sub{font-size:12px;color:var(--text2);}
+.sync-btns{display:flex;gap:8px;flex-shrink:0;}
 
-/* ── filter row ── */
+/* ── filters ── */
 .filter-row{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
 .search-wrap{position:relative;flex:1 1 220px;}
 .search-wrap i{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3);pointer-events:none;}
@@ -67,43 +63,56 @@ a{color:inherit;text-decoration:none;}
 
 /* ── artwork grid ── */
 .art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;}
-.art-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .15s;}
+.art-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .2s;}
 .art-card:hover{border-color:var(--border2);}
-.art-card.selected{outline:2px solid #4a7fd4;outline-offset:2px;}
+.art-card.sel{outline:2px solid #4a7fd4;outline-offset:2px;}
 .art-img{aspect-ratio:4/5;background:var(--bg2);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
 .art-img img{width:100%;height:100%;object-fit:cover;display:block;}
-.art-img .no-img{font-size:32px;color:var(--text3);}
+.no-img-icon{font-size:32px;color:var(--text3);}
 .sel-ov{position:absolute;inset:0;background:rgba(30,80,200,.15);display:flex;align-items:center;justify-content:center;}
-.sel-ck{width:28px;height:28px;border-radius:50%;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;color:var(--blue);}
+.sel-ck{width:28px;height:28px;border-radius:50%;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:16px;}
 .art-body{padding:9px 11px 11px;}
 .art-title{font-weight:500;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px;}
-.art-sub{font-size:12px;color:var(--text2);margin-bottom:1px;}
+.art-sub{font-size:12px;color:var(--text2);margin-bottom:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .art-cat{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
 .art-actions{display:flex;gap:5px;margin-top:9px;}
+.btn-xs{font-size:11px;padding:3px 8px;}
+.btn-xs.danger{color:var(--red);border-color:transparent;background:transparent;}
 
-/* ── link cards ── */
+/* ── links tab ── */
 .link-list{display:flex;flex-direction:column;gap:10px;}
 .link-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;}
+.link-info{flex:1;min-width:0;}
+.link-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+.link-name{font-weight:500;font-size:15px;}
+.link-buyer{font-size:13px;color:var(--text2);}
 .link-url{font-size:11px;font-family:monospace;color:var(--text2);word-break:break-all;margin:4px 0 7px;}
 .link-meta{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--text2);}
 .link-meta i{font-size:13px;vertical-align:-1px;margin-right:3px;}
+.link-btns{display:flex;gap:6px;flex-shrink:0;align-items:flex-start;}
 .pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:var(--r);}
 .pill-green{background:var(--green-bg);color:var(--green);}
 .pill-red{background:var(--red-bg);color:var(--red);}
 
-/* ── modal overlay ── */
+/* ── modal ── */
 .ov{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.42);display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:var(--bg);border-radius:var(--rl);border:.5px solid var(--border);padding:1.5rem;max-width:480px;width:100%;max-height:90vh;overflow-y:auto;}
+.modal{background:var(--bg);border-radius:var(--rl);border:.5px solid var(--border);padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;}
 .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
 .modal-head h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;}
-.close-btn{background:transparent;border:none;font-size:20px;color:var(--text2);padding:2px;}
+.x-btn{background:transparent;border:none;font-size:20px;color:var(--text2);padding:2px;}
 .field{margin-bottom:12px;}
-.field label{font-size:12px;color:var(--text2);display:block;margin-bottom:4px;letter-spacing:.04em;}
+.field label{font-size:12px;color:var(--text2);display:block;margin-bottom:4px;letter-spacing:.03em;}
 .field input,.field select,.field textarea{width:100%;}
 .field textarea{resize:vertical;}
 .exp-btns{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
 .exp-btns button{font-size:11px;padding:3px 9px;}
 .modal-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+
+/* ── link preview box ── */
+.link-preview-box{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem;margin-top:1rem;}
+.link-preview-box p{font-size:12px;color:var(--text2);margin-bottom:6px;}
+.link-preview-url{font-size:11px;font-family:monospace;word-break:break-all;background:var(--bg);border:.5px solid var(--border);border-radius:var(--r);padding:8px 10px;margin-bottom:8px;color:var(--text);}
+.link-preview-box .copy-big{width:100%;justify-content:center;font-size:13px;padding:9px;font-weight:500;}
 
 /* ── lightbox ── */
 .lb{position:fixed;inset:0;z-index:900;background:rgba(6,6,6,.93);display:flex;align-items:center;justify-content:center;padding:24px;}
@@ -122,44 +131,32 @@ a{color:inherit;text-decoration:none;}
 
 /* ══ BUYER VIEW ══ */
 .buyer-wrap{max-width:1060px;margin:0 auto;padding:0 1.5rem 5rem;}
-
-/* buyer nav */
 .buyer-nav{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 1.25rem;border-bottom:.5px solid var(--border);margin-bottom:2.5rem;}
-.gallery-logo-wrap{display:flex;align-items:center;gap:12px;}
-.gallery-logo-img{height:40px;width:auto;display:block;}
-.gallery-logo-text{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:.04em;line-height:1;}
-.gallery-logo-tagline{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:2px;}
-.buyer-nav-right{font-size:12px;color:var(--text3);text-align:right;line-height:1.5;}
-
-/* buyer hero title */
+.gallery-logo-text{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:.04em;line-height:1.1;}
+.gallery-tagline{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+.buyer-nav-right{font-size:12px;color:var(--text3);text-align:right;line-height:1.6;}
 .buyer-hero{margin-bottom:2.5rem;}
 .buyer-hero h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;letter-spacing:.01em;margin-bottom:6px;line-height:1.15;}
 .buyer-hero p{font-size:13px;color:var(--text2);}
-
-/* buyer grid */
 .buyer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;}
 .buyer-card{background:var(--bg);}
 .buyer-img{aspect-ratio:4/5;background:var(--bg2);overflow:hidden;cursor:zoom-in;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
 .buyer-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
 .buyer-img:hover img{transform:scale(1.04);}
-.buyer-img .no-img{font-size:36px;color:var(--text3);}
-.buyer-art-artist{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
-.buyer-art-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:3px;line-height:1.25;}
-.buyer-art-meta{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5;}
-.btn-enq{width:100%;font-size:12px;padding:8px;justify-content:center;letter-spacing:.06em;border-color:var(--border2);background:transparent;}
-.btn-enq:hover{background:var(--bg2);}
-
-/* buyer footer */
-.buyer-footer{margin-top:5rem;padding-top:2rem;border-top:.5px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;}
+.buyer-artist{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.buyer-title{font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:3px;line-height:1.25;}
+.buyer-meta{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5;}
+.btn-enq{width:100%;font-size:12px;padding:8px;justify-content:center;letter-spacing:.05em;border-color:var(--border2);}
+.buyer-footer{margin-top:5rem;padding-top:2rem;border-top:.5px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:.04em;}
 .footer-copy{font-size:11px;color:var(--text3);line-height:1.8;}
 .footer-contact{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
-.footer-btn{font-size:12px;padding:8px 18px;border:.5px solid var(--border2);border-radius:var(--r);display:inline-flex;align-items:center;gap:7px;color:var(--text);}
+.footer-btn{font-size:12px;padding:8px 18px;border:.5px solid var(--border2);border-radius:var(--r);display:inline-flex;align-items:center;gap:7px;}
 .footer-btn:hover{background:var(--bg2);}
 
-/* inquiry modal */
+/* inquiry */
 .inq-thumb{width:100%;height:150px;object-fit:cover;border-radius:var(--r);margin-bottom:14px;display:block;}
-.contact-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border:.5px solid var(--border);border-radius:var(--rl);cursor:pointer;text-decoration:none;color:var(--text);margin-bottom:10px;transition:background .15s;}
+.contact-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border:.5px solid var(--border);border-radius:var(--rl);text-decoration:none;color:var(--text);margin-bottom:10px;transition:background .15s;}
 .contact-row:hover{background:var(--bg2);}
 .c-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
 .c-icon.wa{background:#e4f8ed;color:#25D366;}
@@ -167,13 +164,11 @@ a{color:inherit;text-decoration:none;}
 .c-label{font-weight:500;font-size:14px;}
 .c-sub{font-size:12px;color:var(--text2);}
 
-/* gate */
+/* gate / empty */
 .gate{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:2rem;}
 .gate i{font-size:48px;color:var(--text3);}
 .gate h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;}
 .gate p{font-size:13px;color:var(--text2);}
-
-/* empty */
 .empty{text-align:center;padding:4rem 1rem;color:var(--text3);}
 .empty i{font-size:38px;display:block;margin-bottom:12px;}
 .empty-title{font-size:15px;font-weight:500;color:var(--text2);margin-bottom:5px;}
@@ -184,104 +179,150 @@ a{color:inherit;text-decoration:none;}
 .toast.ok{border-color:#1d9e75;color:var(--green);}
 .toast.err{border-color:#c0392b;color:var(--red);}
 
-/* btn sizes */
+/* btn helpers */
 .btn-sm{font-size:12px;padding:6px 12px;}
 .btn-primary{font-weight:500;}
+.btn-danger{color:var(--red);border-color:var(--red);}
 
-@media(max-width:600px){
-  .lb-inner{flex-direction:column;}
-  .lb-img{max-width:100%;}
-  .art-grid{grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:10px;}
-  .buyer-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;}
+@media(max-width:640px){
+  .lb-inner{flex-direction:column;} .lb-img{max-width:100%;}
+  .art-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;}
+  .buyer-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}
   .buyer-hero h1{font-size:28px;}
-  .buyer-nav{flex-direction:column;align-items:flex-start;gap:10px;}
+  .buyer-nav{flex-direction:column;align-items:flex-start;gap:8px;}
 }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script>
-/* ══ CONFIG ══════════════════════════════════════════════════════════════════
-   UPDATE THESE BEFORE UPLOADING TO GITHUB
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════════
+   CONFIG  — edit these before uploading to GitHub
+   ══════════════════════════════════════════════════════════════════════ */
 const CFG = {
-  gallery:    "Dhoomimal Art Centre",          // gallery name shown on buyer view
-  tagline:    "New Delhi · Est. 1936",         // shown under logo
-  logoUrl:    "",                               // URL to your logo image (leave "" to use text)
-  whatsapp:   "919810000000",                  // your WhatsApp with country code, no +
-  email:      "gallery@dhoomimal.com",         // your gallery email
-  password:   "dhoomimal2024",                 // admin password — CHANGE THIS
-  sheetCsv:   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxGBn7IifAiexzIT-It_xhZ8D49JYShlUuMc9FJ-bO0Qzsq90jm32Y6o4cVMnBbbZYfUgVmpBEj493/pub?output=csv",
+  gallery:   "Dhoomimal Art Centre",
+  tagline:   "New Delhi · Est. 1936",
+  logoUrl:   "",                          // paste your logo image URL here (optional)
+  whatsapp:  "919810000000",              // your WhatsApp with country code, no +
+  email:     "gallery@dhoomimal.com",     // your gallery email
+  password:  "dhoomimal2024",             // change this!
+  sheetCsv:  "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxGBn7IifAiexzIT-It_xhZ8D49JYShlUuMc9FJ-bO0Qzsq90jm32Y6o4cVMnBbbZYfUgVmpBEj493/pub?output=csv",
 };
 
-/* ══ STATE ═══════════════════════════════════════════════════════════════ */
-const STORE = "dac_v3";
-let S = { artworks:[], links:[] };
-try { const d=JSON.parse(localStorage.getItem(STORE)||"{}"); S.artworks=d.artworks||[]; S.links=d.links||[]; } catch(e){}
-function save(){ try{ localStorage.setItem(STORE,JSON.stringify(S)); }catch(e){} }
+/* ══════════════════════════════════════════════════════════════════════
+   HOW LINKS WORK (important!)
+   ──────────────────────────────────────────────────────────────────────
+   All artwork data + expiry is encoded INTO the URL itself using
+   base64. This means buyers can open the link on ANY device without
+   needing to log in or sync. The link is self-contained.
+   ══════════════════════════════════════════════════════════════════════ */
 
-let selected  = [];
-let adminTab  = "artworks";
-let qSearch   = "";
-let qArtist   = "All";
-let qCat      = "All";
-let syncMsg   = "";
-let curModal  = null;
-let lbWork    = null;
-let linkDraft = { title:"", buyer:"", expiry: plus(30) };
-let artDraft  = { title:"", artist:"", year:"", medium:"", dimensions:"", category:"", image:"", description:"" };
-const root    = document.getElementById("root");
+/* ── state stored in localStorage (admin only) ── */
+const STORE = "dac_v4";
+let S = { artworks: [] };
+try { const d = JSON.parse(localStorage.getItem(STORE)||"{}"); S.artworks = d.artworks||[]; } catch(e){}
+function persist(){ try{ localStorage.setItem(STORE, JSON.stringify(S)); }catch(e){} }
 
-/* ══ UTILS ═══════════════════════════════════════════════════════════════ */
-function uid(){ return Math.random().toString(36).slice(2,18)+Math.random().toString(36).slice(2,10); }
+/* ── ui state ── */
+let sel      = [];          // selected artwork IDs
+let adminTab = "artworks";
+let qSearch  = "";
+let qArtist  = "All";
+let qCat     = "All";
+let syncMsg  = "";
+let modal    = null;        // "link" | "addArt" | "linkDone"
+let lbWork   = null;
+let doneLink = "";          // the generated link to show
+let linkDraft= { title:"", buyer:"", expiry: plus(30) };
+let artDraft = { title:"",artist:"",year:"",medium:"",dimensions:"",category:"",image:"",description:"" };
+
+const root = document.getElementById("root");
+
+/* ══ ENCODE / DECODE LINK DATA ════════════════════════════════════════ */
+function encodeLink(viewData) {
+  // viewData = { title, buyer, expiry, artworks: [...] }
+  const json = JSON.stringify(viewData);
+  const b64  = btoa(unescape(encodeURIComponent(json)));
+  return b64;
+}
+function decodeLink(b64) {
+  try {
+    const json = decodeURIComponent(escape(atob(b64)));
+    return JSON.parse(json);
+  } catch(e) { return null; }
+}
+function getViewParam() {
+  return new URLSearchParams(location.search).get("v");
+}
+
+/* ══ UTILS ════════════════════════════════════════════════════════════ */
+function uid(){ return Math.random().toString(36).slice(2,18); }
 function plus(n){ const d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().split("T")[0]; }
 function fmtDate(iso){ return iso ? new Date(iso).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"}) : ""; }
-function expired(l){ return l&&l.expiry && new Date(l.expiry+"T23:59:59")<new Date(); }
-function slug(){ return new URLSearchParams(location.search).get("view"); }
+function isExpired(expiry){ return expiry && new Date(expiry+"T23:59:59") < new Date(); }
 function loggedIn(){ return sessionStorage.getItem("dac_auth")==="1"; }
 
 let toastT;
-function toast(msg,ok=true){
+function toast(msg, ok=true){
   document.querySelectorAll(".toast").forEach(t=>t.remove());
-  const t=el("div","toast "+(ok?"ok":"err"),[ic(ok?"check":"alert-circle"),txt(msg)]);
+  const t = mk("div","toast "+(ok?"ok":"err"));
+  t.appendChild(ic(ok?"check":"alert-circle")); t.appendChild(tx(msg));
   document.body.appendChild(t);
-  clearTimeout(toastT); toastT=setTimeout(()=>t.remove(),3200);
+  clearTimeout(toastT); toastT = setTimeout(()=>t.remove(), 3200);
 }
 
-function el(tag,cls,children,attrs){
-  const d=document.createElement(tag);
-  if(cls) d.className=cls;
-  if(attrs) Object.entries(attrs).forEach(([k,v])=>{
-    if(k.startsWith("on")) d.addEventListener(k.slice(2).toLowerCase(),v);
-    else d.setAttribute(k,v);
-  });
-  (children||[]).forEach(c=>{ if(c==null) return; d.appendChild(typeof c==="string"?document.createTextNode(c):c); });
-  return d;
+/* ── tiny DOM helpers ── */
+function mk(tag, cls, attrs){
+  const el = document.createElement(tag);
+  if(cls) el.className = cls;
+  if(attrs) for(const [k,v] of Object.entries(attrs)){
+    if(k.startsWith("on")) el.addEventListener(k.slice(2).toLowerCase(), v);
+    else el.setAttribute(k,v);
+  }
+  return el;
 }
-function txt(t){ return document.createTextNode(t); }
-function ic(name,style){ const i=document.createElement("i"); i.className=`ti ti-${name}`; i.setAttribute("aria-hidden","true"); if(style) i.style.cssText=style; return i; }
-function btn(label,cls,onClick,iconName){
-  const b=el("button",cls,[]);
-  if(iconName) b.appendChild(ic(iconName));
-  b.appendChild(txt(label));
-  b.addEventListener("click",onClick);
-  return b;
-}
-function inp(val,ph,onInput,type){
-  const i=document.createElement("input");
-  if(type) i.type=type; i.value=val||""; if(ph) i.placeholder=ph;
-  i.addEventListener("input",()=>onInput(i.value));
+function tx(t){ return document.createTextNode(String(t||"")); }
+function ic(name, style){
+  const i = mk("i","ti ti-"+name,{"aria-hidden":"true"});
+  if(style) i.style.cssText = style;
   return i;
 }
-function field(label,child){
-  const f=el("div","field",[el("label","",[txt(label)]),child]);
-  return f;
+function ap(parent, ...children){
+  for(const c of children.flat()){
+    if(c==null||c===false) continue;
+    parent.appendChild(typeof c==="string"? tx(c) : c);
+  }
+  return parent;
+}
+function btn(label, cls, onClick, iconName){
+  const b = mk("button", cls||"");
+  if(iconName) b.appendChild(ic(iconName));
+  b.appendChild(tx(label));
+  b.addEventListener("click", onClick);
+  return b;
+}
+function inp(val, ph, onInput, type){
+  const i = mk("input","",type?{type}:{});
+  i.value = val||""; if(ph) i.placeholder = ph;
+  i.addEventListener("input", ()=>onInput(i.value));
+  return i;
+}
+function fld(label, child){
+  const f = mk("div","field");
+  const l = mk("label"); l.textContent = label;
+  return ap(f, l, child);
+}
+function sel$(arr, current, onChange, style){
+  const s = mk("select"); if(style) s.style.cssText=style;
+  arr.forEach(o=>{ const op=mk("option"); op.value=o; op.textContent=o; if(o===current) op.selected=true; s.appendChild(op); });
+  s.addEventListener("change",()=>onChange(s.value));
+  return s;
 }
 
-/* ══ CSV ════════════════════════════════════════════════════════════════= */
+/* ══ CSV PARSER ═══════════════════════════════════════════════════════ */
 function parseCSV(text){
-  const lines=text.trim().split(/\r?\n/).filter(Boolean);
-  if(lines.length<2) return [];
+  const lines = text.trim().split(/\r?\n/).filter(Boolean);
+  if(lines.length < 2) return [];
   function row(line){
     const cells=[]; let cur=""; let inQ=false;
     for(let i=0;i<line.length;i++){
@@ -294,319 +335,322 @@ function parseCSV(text){
     }
     cells.push(cur.trim()); return cells;
   }
-  const hdrs=row(lines[0]).map(h=>h.toLowerCase().replace(/\s+/g," ").trim());
-  const col=(...ks)=>{ for(const k of ks){ const i=hdrs.findIndex(h=>h.includes(k)); if(i!==-1) return i; } return -1; };
+  const hdrs = row(lines[0]).map(h=>h.toLowerCase().replace(/\s+/g," ").trim());
+  const col  = (...ks) => { for(const k of ks){ const i=hdrs.findIndex(h=>h.includes(k)); if(i!==-1) return i; } return -1; };
   const iT=col("title","name","artwork"), iA=col("artist","painter","author"),
-        iY=col("year","date"), iM=col("medium","material"),
-        iD=col("dimension","size"), iC=col("category","type","genre","series"),
+        iY=col("year","date"),            iM=col("medium","material"),
+        iD=col("dimension","size"),       iC=col("category","type","genre","series"),
         iI=col("image","photo","url","img"), iDe=col("desc","note","detail","about");
   return lines.slice(1).map((line,i)=>{
     const r=row(line); const g=idx=>(idx!==-1&&r[idx])?r[idx].trim():"";
-    return { id:uid(), title:g(iT)||`Work ${i+1}`, artist:g(iA), year:g(iY), medium:g(iM), dimensions:g(iD), category:g(iC), image:g(iI), description:g(iDe) };
-  }).filter(a=>a.title&&a.title!=="Work 0");
+    return { id:uid(), title:g(iT)||`Work ${i+1}`, artist:g(iA), year:g(iY), medium:g(iM),
+             dimensions:g(iD), category:g(iC), image:g(iI), description:g(iDe) };
+  }).filter(a=>a.title && a.title!=="Work 0");
 }
 
-/* ══ ROUTER ══════════════════════════════════════════════════════════════ */
-const viewSlug = slug();
-if(viewSlug){
-  renderBuyer(viewSlug);
+/* ══ ROUTER ═══════════════════════════════════════════════════════════ */
+const viewParam = getViewParam();
+if(viewParam){
+  const data = decodeLink(viewParam);
+  if(!data) renderGate("ti-lock","This link is invalid or cannot be read.");
+  else if(isExpired(data.expiry)) renderGate("ti-calendar-x","This private view has expired.");
+  else renderBuyer(data);
 } else {
-  if(loggedIn()) renderAdmin();
-  else renderLogin();
+  loggedIn() ? renderAdmin() : renderLogin();
 }
 
-/* ══ LOGIN ═══════════════════════════════════════════════════════════════ */
+/* ══ LOGIN ════════════════════════════════════════════════════════════ */
 function renderLogin(){
-  root.innerHTML="";
-  const box=el("div","login-box",[
-    el("div","login-logo",[txt(CFG.gallery)]),
-    el("div","login-sub",[txt("Private Views · Admin")]),
-  ]);
-  const pwInput=el("input","",[]); pwInput.type="password"; pwInput.placeholder="Enter password"; pwInput.style.width="100%"; pwInput.style.textAlign="center"; pwInput.style.fontSize="14px"; pwInput.style.padding="10px"; pwInput.style.marginBottom="12px";
-  const errMsg=el("div","login-err",[]);
-  const loginBtn=el("button","btn-primary",[txt("Sign in")]);
-  loginBtn.style.cssText="width:100%;justify-content:center;font-size:13px;padding:10px;";
+  root.innerHTML = "";
+  const screen = mk("div",""); screen.id="login-screen";
+  const box    = mk("div","login-box");
+  const logo   = mk("div","login-logo"); logo.textContent = CFG.gallery;
+  const sub    = mk("div","login-sub");  sub.textContent  = "Private Views · Admin";
+  const pwInp  = mk("input",""); pwInp.type="password"; pwInp.placeholder="Enter password";
+  pwInp.style.cssText="width:100%;text-align:center;font-size:14px;padding:10px;margin-bottom:12px;letter-spacing:.08em;";
+  const errMsg = mk("div","login-err");
+  const loginBtn = mk("button","login-btn"); loginBtn.textContent="Sign in";
+
   function tryLogin(){
-    if(pwInput.value===CFG.password){ sessionStorage.setItem("dac_auth","1"); renderAdmin(); }
-    else{ errMsg.textContent="Incorrect password"; pwInput.value=""; pwInput.focus(); }
+    if(pwInp.value === CFG.password){ sessionStorage.setItem("dac_auth","1"); renderAdmin(); }
+    else{ errMsg.textContent="Incorrect password. Please try again."; pwInp.value=""; pwInp.focus(); }
   }
-  loginBtn.addEventListener("click",tryLogin);
-  pwInput.addEventListener("keydown",e=>{ if(e.key==="Enter") tryLogin(); });
-  box.appendChild(pwInput); box.appendChild(loginBtn); box.appendChild(errMsg);
-  const screen=el("div","",[ box ]); screen.id="login-screen";
-  root.appendChild(screen);
-  setTimeout(()=>pwInput.focus(),50);
+  loginBtn.addEventListener("click", tryLogin);
+  pwInp.addEventListener("keydown", e=>{ if(e.key==="Enter") tryLogin(); });
+  ap(box, logo, sub, pwInp, loginBtn, errMsg);
+  ap(screen, box);
+  ap(root, screen);
+  setTimeout(()=>pwInp.focus(), 60);
 }
 
-/* ══ ADMIN ═══════════════════════════════════════════════════════════════ */
+/* ══ ADMIN ════════════════════════════════════════════════════════════ */
 function renderAdmin(){
-  root.innerHTML="";
-  root.appendChild(buildAdminPage());
+  root.innerHTML = "";
+  ap(root, buildAdmin());
 }
 
-function buildAdminPage(){
-  const wrap=el("div","page",[]);
+function buildAdmin(){
+  const wrap = mk("div","page");
 
-  /* header */
-  const hdrRight=el("div","admin-right",[]);
-  if(selected.length>0){
-    const cb=btn(`Create private view (${selected.length})`,"btn-primary",()=>openModal("link"),"send");
+  /* ── header ── */
+  const hdrR = mk("div","admin-right");
+  if(sel.length > 0){
+    const cb = btn(`Create private view  (${sel.length} selected)`, "btn-primary btn-sm", ()=>openModal("link"), "send");
     cb.style.fontSize="13px"; cb.style.padding="7px 14px";
-    hdrRight.appendChild(cb);
+    hdrR.appendChild(cb);
   }
-  hdrRight.appendChild(el("span","badge",[txt("ADMIN")]));
-  const logoutBtn=el("button","btn-sm",[ic("logout"),txt("Sign out")]);
-  logoutBtn.addEventListener("click",()=>{ sessionStorage.removeItem("dac_auth"); renderLogin(); });
-  hdrRight.appendChild(logoutBtn);
-  wrap.appendChild(el("div","admin-bar",[
-    el("div","",[el("div","admin-logo",[txt(CFG.gallery)])]),
-    hdrRight,
-  ]));
+  ap(hdrR,
+    mk("span","badge") ||(()=>{ const s=mk("span","badge"); s.textContent="ADMIN"; return s; })(),
+    btn("Sign out","btn-sm",()=>{ sessionStorage.removeItem("dac_auth"); renderLogin(); },"logout")
+  );
+  // fix badge
+  const badgeEl = mk("span","badge"); badgeEl.textContent="ADMIN";
+  hdrR.insertBefore(badgeEl, hdrR.querySelector("button:last-child"));
 
-  /* tabs */
-  const tabs=el("div","tabs",[]);
-  [["artworks","photo",`Artworks (${S.artworks.length})`],["links","link",`Private views (${S.links.length})`]].forEach(([t,ic_,label])=>{
-    const tb=el("button",`tab${adminTab===t?" active":""}`,[ document.createElement("i"), txt(label) ]);
-    tb.querySelector("i").className=`ti ti-${ic_}`; tb.querySelector("i").setAttribute("aria-hidden","true");
+  ap(wrap,
+    ap(mk("div","admin-bar"),
+      ap(mk("div",""), ap(mk("div","admin-logo"), tx(CFG.gallery))),
+      hdrR
+    )
+  );
+
+  /* ── tabs ── */
+  const tabsEl = mk("div","tabs");
+  [["artworks","photo",`Artworks (${S.artworks.length})`],["links","link","How to share"]].forEach(([t,ic_,label])=>{
+    const tb = mk("button",`tab${adminTab===t?" active":""}`);
+    tb.appendChild(ic(ic_)); tb.appendChild(tx(label));
     tb.addEventListener("click",()=>{ adminTab=t; renderAdmin(); });
-    tabs.appendChild(tb);
+    tabsEl.appendChild(tb);
   });
-  wrap.appendChild(tabs);
+  ap(wrap, tabsEl);
 
-  if(adminTab==="artworks") wrap.appendChild(buildArtworksTab());
-  if(adminTab==="links")    wrap.appendChild(buildLinksTab());
-
-  if(curModal==="link")     wrap.appendChild(buildLinkModal());
-  if(curModal==="addArt")   wrap.appendChild(buildAddArtModal());
-  if(lbWork)                wrap.appendChild(buildLightbox(lbWork,false));
+  if(adminTab==="artworks") ap(wrap, buildArtworksTab());
+  if(adminTab==="links")    ap(wrap, buildShareTab());
+  if(modal==="link")        ap(wrap, buildLinkModal());
+  if(modal==="addArt")      ap(wrap, buildAddArtModal());
+  if(modal==="linkDone")    ap(wrap, buildLinkDoneModal());
+  if(lbWork)                ap(wrap, buildLightbox(lbWork, false));
 
   return wrap;
 }
 
+/* ── artworks tab ── */
 function buildArtworksTab(){
-  const frag=document.createDocumentFragment();
+  const frag = document.createDocumentFragment();
 
   /* sync bar */
-  const sb=el("div","sync-bar",[]);
-  const si=el("div","",[el("p","sync-title",[txt("Google Sheets · Dhoomimal Catalogue")]),el("p","sync-sub",[txt(syncMsg||"Sync artworks from your published Google Sheet.")])]);
-  const sbBtns=el("div","",[]); sbBtns.style.cssText="display:flex;gap:8px;flex-shrink:0;";
-  const resyncBtn=btn("Re-sync all","btn-sm",doResync,"refresh");
-  const addNewBtn=btn("Add new","btn-sm",doSyncNew,"cloud-download");
-  const manualBtn=btn("Add manually","btn-sm",()=>openModal("addArt"),"plus");
-  sbBtns.appendChild(resyncBtn); sbBtns.appendChild(addNewBtn); sbBtns.appendChild(manualBtn);
-  sb.appendChild(si); sb.appendChild(sbBtns);
+  const sb = mk("div","sync-bar");
+  const si = mk("div","");
+  ap(si, ap(mk("p","sync-title"),tx("Google Sheets · Dhoomimal Catalogue")),
+         ap(mk("p","sync-sub"), tx(syncMsg||"Sync artworks directly from your published Google Sheet.")));
+  const sbBtns = mk("div","sync-btns");
+  ap(sbBtns,
+    btn("Re-sync all",   "btn-sm", doResync,    "refresh"),
+    btn("Add new only",  "btn-sm", doSyncNew,   "cloud-download"),
+    btn("Add manually",  "btn-sm", ()=>openModal("addArt"), "plus")
+  );
+  ap(sb, si, sbBtns);
   frag.appendChild(sb);
 
   /* filters */
-  const fr=el("div","filter-row",[]);
-  const sw=el("div","search-wrap",[]); sw.appendChild(ic("search"));
-  const si2=inp(qSearch,"Search artist, title, medium, year…",v=>{qSearch=v;renderGrid(grid);});
+  const fr = mk("div","filter-row");
+  const sw = mk("div","search-wrap");
+  sw.appendChild(ic("search"));
+  const si2 = inp(qSearch,"Search artist, title, medium, year…", v=>{ qSearch=v; renderGrid(grid); });
   sw.appendChild(si2); fr.appendChild(sw);
 
-  const artists=["All",...new Set(S.artworks.map(a=>a.artist).filter(Boolean))].sort();
-  const cats   =["All",...new Set(S.artworks.map(a=>a.category).filter(Boolean))].sort();
-  [["Artist",artists,v=>{ qArtist=v; renderGrid(grid); }],["Category",cats,v=>{ qCat=v; renderGrid(grid); }]].forEach(([label,opts,onChange])=>{
-    if(opts.length<=1) return;
-    const sel=document.createElement("select"); sel.style.fontSize="13px";
-    opts.forEach(o=>{ const op=document.createElement("option"); op.value=o; op.textContent=o; if(o===(label==="Artist"?qArtist:qCat)) op.selected=true; sel.appendChild(op); });
-    sel.addEventListener("change",()=>onChange(sel.value));
-    fr.appendChild(sel);
-  });
+  const artists = ["All",...[...new Set(S.artworks.map(a=>a.artist).filter(Boolean))].sort()];
+  const cats    = ["All",...[...new Set(S.artworks.map(a=>a.category).filter(Boolean))].sort()];
+  if(artists.length>1) fr.appendChild(sel$(artists, qArtist, v=>{ qArtist=v; renderGrid(grid); }, "font-size:13px;"));
+  if(cats.length>1)    fr.appendChild(sel$(cats,    qCat,    v=>{ qCat=v;    renderGrid(grid); }, "font-size:13px;"));
 
-  const filt=getFiltered();
-  if(filt.length>0){
-    if(selected.length===filt.length){
-      fr.appendChild(btn("Clear selection","btn-sm",()=>{selected=[];renderAdmin();}));
-    } else {
-      fr.appendChild(btn(`Select all (${filt.length})`,"btn-sm",()=>{selected=filt.map(a=>a.id);renderAdmin();}));
-    }
+  const filt = getFiltered();
+  if(filt.length > 0){
+    if(sel.length === filt.length)
+      fr.appendChild(btn("Clear selection","btn-sm",()=>{ sel=[]; renderAdmin(); }));
+    else
+      fr.appendChild(btn(`Select all (${filt.length})`, "btn-sm", ()=>{ sel=filt.map(a=>a.id); renderAdmin(); }));
   }
   frag.appendChild(fr);
 
-  const grid=el("div","art-grid",[]);
+  const grid = mk("div","art-grid");
   renderGrid(grid);
   frag.appendChild(grid);
   return frag;
 }
 
 function getFiltered(){
-  const q=qSearch.toLowerCase();
+  const q = qSearch.toLowerCase();
   return S.artworks.filter(a=>{
-    const mQ=!q||[a.title,a.artist,a.medium,a.category,a.year].some(v=>v&&v.toLowerCase().includes(q));
-    return mQ&&(qArtist==="All"||a.artist===qArtist)&&(qCat==="All"||a.category===qCat);
+    const mQ = !q||[a.title,a.artist,a.medium,a.category,a.year].some(v=>v&&v.toLowerCase().includes(q));
+    return mQ && (qArtist==="All"||a.artist===qArtist) && (qCat==="All"||a.category===qCat);
   });
 }
-
 function renderGrid(grid){
   grid.innerHTML="";
-  const filt=getFiltered();
-  if(!S.artworks.length){ grid.appendChild(buildEmpty("cloud-download","No artworks yet",'Click "Add new" to import from your Google Sheet.')); return; }
+  const filt = getFiltered();
+  if(!S.artworks.length){ grid.appendChild(buildEmpty("cloud-download","No artworks yet",'Click "Add new only" or "Re-sync all" above.')); return; }
   if(!filt.length){ grid.appendChild(buildEmpty("search-off","No results","Try adjusting your search or filters.")); return; }
   filt.forEach(a=>grid.appendChild(buildAdminCard(a)));
 }
-
 function buildAdminCard(a){
-  const isSel=selected.includes(a.id);
-  const card=el("div",`art-card${isSel?" selected":""}`,[]); card.style.cursor="pointer";
-  card.addEventListener("click",()=>{
-    isSel ? (selected=selected.filter(x=>x!==a.id)) : selected.push(a.id);
-    renderAdmin();
-  });
-  const imgW=el("div","art-img",[]);
-  if(a.image){ const img=el("img","",[]); img.src=a.image; img.alt=a.title; img.onerror=()=>{imgW.innerHTML="";imgW.appendChild(ic("photo","no-img"));}; imgW.appendChild(img); }
-  else imgW.appendChild(ic("photo","no-img"));
-  if(isSel){ const ov=el("div","sel-ov",[el("div","sel-ck",[ic("check")])]); imgW.appendChild(ov); }
+  const isSel = sel.includes(a.id);
+  const card  = mk("div",`art-card${isSel?" sel":""}`);
+  card.addEventListener("click",()=>{ isSel ? (sel=sel.filter(x=>x!==a.id)) : sel.push(a.id); renderAdmin(); });
+  const imgW = mk("div","art-img");
+  if(a.image){ const img=mk("img","",{src:a.image,alt:a.title}); img.onerror=()=>{imgW.innerHTML="";imgW.appendChild(ic("photo","no-img-icon"));}; imgW.appendChild(img); }
+  else ap(imgW, ic("photo","no-img-icon"));
+  if(isSel) ap(imgW, ap(mk("div","sel-ov"), ap(mk("div","sel-ck"), ic("check"))));
   card.appendChild(imgW);
-
-  const body=el("div","art-body",[
-    el("div","art-title",[txt(a.title)]),
-    el("div","art-sub",[txt(`${a.artist||""}${a.year?`, ${a.year}`:""}`)]),
-    el("div","art-sub",[ el("span","",[ txt(a.medium||"") ], {"style":"color:var(--text3);font-size:11px;"}) ]),
-  ]);
-  if(a.category) body.appendChild(el("div","art-cat",[txt(a.category)]));
-
-  const acts=el("div","art-actions",[]);
-  const vBtn=btn("View","btn-sm",ev=>{ ev.stopPropagation(); lbWork=a; renderAdmin(); },"eye");
-  vBtn.style.fontSize="11px"; vBtn.style.padding="3px 8px";
-  const dBtn=el("button","",[]); dBtn.style.cssText="font-size:11px;padding:3px 8px;color:var(--red);margin-left:auto;border-color:transparent;";
-  dBtn.appendChild(ic("trash"));
-  dBtn.addEventListener("click",ev=>{ ev.stopPropagation(); S.artworks=S.artworks.filter(x=>x.id!==a.id); selected=selected.filter(x=>x!==a.id); save(); toast("Artwork removed"); renderAdmin(); });
-  acts.appendChild(vBtn); acts.appendChild(dBtn);
-  body.appendChild(acts);
-  card.appendChild(body);
+  const body = mk("div","art-body");
+  ap(body, ap(mk("div","art-title"),tx(a.title)), ap(mk("div","art-sub"),tx(`${a.artist||""}${a.year?`, ${a.year}`:""}`)), ap(mk("div","art-sub"),tx(a.medium||"")));
+  if(a.category) ap(body, ap(mk("div","art-cat"),tx(a.category)));
+  const acts = mk("div","art-actions");
+  const vb = btn("View","btn-xs", ev=>{ ev.stopPropagation(); lbWork=a; renderAdmin(); }, "eye");
+  const db = btn("","btn-xs danger", ev=>{ ev.stopPropagation(); S.artworks=S.artworks.filter(x=>x.id!==a.id); sel=sel.filter(x=>x!==a.id); persist(); toast("Artwork removed"); renderAdmin(); }, "trash");
+  db.style.marginLeft="auto";
+  ap(acts,vb,db); body.appendChild(acts); card.appendChild(body);
   return card;
 }
 
-function buildLinksTab(){
-  if(!S.links.length) return buildEmpty("link-off","No private views yet",'Go to Artworks, select works, then click "Create private view".');
-  const list=el("div","link-list",[]);
-  S.links.forEach(l=>{
-    const url=`${location.origin}${location.pathname}?view=${l.slug}`;
-    const exp=expired(l);
-    const cnt=l.artworkIds.length;
-    const card=el("div","link-card",[]);
-    const info=el("div","",[]);info.style.flex="1";info.style.minWidth="0";
-    const titleRow=el("div","",[]); titleRow.style.cssText="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;";
-    titleRow.appendChild(el("span","",[ txt(l.title) ],{"style":"font-weight:500;font-size:15px;"}));
-    if(l.buyer) titleRow.appendChild(el("span","",[ txt(`· ${l.buyer}`) ],{"style":"font-size:13px;color:var(--text2);"}));
-    titleRow.appendChild(el("span",`pill ${exp?"pill-red":"pill-green"}`,[txt(exp?"Expired":"Active")]));
-    info.appendChild(titleRow);
-    info.appendChild(el("div","link-url",[txt(url)]));
-    const meta=el("div","link-meta",[]);
-    [[`photo`,`${cnt} artwork${cnt!==1?"s":""}`],[`calendar-plus`,`Created ${fmtDate(l.created?.split("T")[0])}`],[`calendar-off`,`Expires ${fmtDate(l.expiry)}`]].forEach(([icon_,label_])=>{
-      const s=el("span","",[ic(icon_),txt(label_)]); meta.appendChild(s);
-    });
-    info.appendChild(meta); card.appendChild(info);
-    const btns=el("div","",[]); btns.style.cssText="display:flex;gap:6px;flex-shrink:0;align-items:flex-start;";
-    const cpBtn=btn("Copy","btn-sm",()=>navigator.clipboard.writeText(url).then(()=>toast("Link copied")).catch(()=>{}),"copy");
-    const prBtn=el("a","btn-sm",[ic("external-link"),txt("Preview")],{href:url,target:"_blank"});
-    prBtn.style.cssText="font-size:12px;padding:6px 12px;border:.5px solid var(--border2);border-radius:var(--r);";
-    const dlBtn=el("button","btn-sm",[ic("trash")]); dlBtn.style.cssText="color:var(--red);border-color:var(--red);";
-    dlBtn.addEventListener("click",()=>{ S.links=S.links.filter(x=>x.id!==l.id); save(); toast("Link deleted"); renderAdmin(); });
-    btns.appendChild(cpBtn); btns.appendChild(prBtn); btns.appendChild(dlBtn);
-    card.appendChild(btns); list.appendChild(card);
-  });
-  return list;
+/* ── share/how-to tab ── */
+function buildShareTab(){
+  const wrap = mk("div","");
+  const info = mk("div","sync-bar"); info.style.flexDirection="column"; info.style.alignItems="flex-start";
+  ap(info,
+    ap(mk("p","sync-title"), tx("How sharing works")),
+    ap(mk("p","sync-sub"), tx("Go to the Artworks tab → select artworks (click to tick them) → click \"Create private view\" → copy the generated link → send it to your buyer via WhatsApp or email. The link works on any device, no login needed.")),
+  );
+  wrap.appendChild(info);
+  return wrap;
 }
 
-/* modals */
-function openModal(name){ curModal=name; renderAdmin(); }
-function closeModal(){ curModal=null; renderAdmin(); }
+/* ── modals ── */
+function openModal(name){ modal=name; renderAdmin(); }
+function closeModal(){    modal=null; renderAdmin(); }
 
 function buildLinkModal(){
-  const ov=el("div","ov",[]); ov.addEventListener("click",e=>{ if(e.target===ov) closeModal(); });
-  const m=el("div","modal",[]);
-  const mh=el("div","modal-head",[
-    el("h3","",[txt("Create private view")]),
-    btn("","close-btn",closeModal,"x"),
-  ]);
-  m.appendChild(mh);
-  m.appendChild(el("p","",[ txt(`${selected.length} artwork${selected.length!==1?"s":""} selected`) ],{"style":"font-size:13px;color:var(--text2);margin-bottom:1rem;"}));
-  const tInp=inp(linkDraft.title,"e.g. Works by Ramesh Qadri — Autumn 2025",v=>linkDraft.title=v);
-  m.appendChild(field("View title *",tInp));
-  const bInp=inp(linkDraft.buyer,"e.g. Mr Sharma",v=>linkDraft.buyer=v);
-  m.appendChild(field("Buyer name (optional)",bInp));
-  const eInp=document.createElement("input"); eInp.type="date"; eInp.value=linkDraft.expiry; eInp.style.width="100%"; eInp.addEventListener("change",()=>linkDraft.expiry=eInp.value);
-  const expBtns=el("div","exp-btns",[]); [7,14,30,60,90].forEach(d=>{ const b=btn(`${d} days`,"",()=>{ linkDraft.expiry=plus(d); eInp.value=plus(d); }); expBtns.appendChild(b); });
-  const expWrap=el("div","",[eInp,expBtns]);
-  m.appendChild(field("Link expires on",expWrap));
-  const foot=el("div","modal-foot",[]);
-  foot.appendChild(btn("Cancel","btn-sm",closeModal));
-  const goBtn=btn("Generate link","btn-primary btn-sm",()=>{
+  const ov = mk("div","ov"); ov.addEventListener("click",e=>{ if(e.target===ov) closeModal(); });
+  const m  = mk("div","modal");
+  const mh = mk("div","modal-head");
+  ap(mh, ap(mk("h3",""),tx("Create private view")), btn("","x-btn",closeModal,"x"));
+  ap(m, mh);
+  ap(m, ap(mk("p",""),tx(`${sel.length} artwork${sel.length!==1?"s":""} selected — link will open on any device.`)));
+  m.querySelector("p").style.cssText="font-size:13px;color:var(--text2);margin-bottom:1rem;";
+
+  const tInp = inp(linkDraft.title,"e.g. Works by Ramesh Qadri — Autumn 2025",v=>linkDraft.title=v);
+  ap(m, fld("View title *", tInp));
+  const bInp = inp(linkDraft.buyer,"e.g. Mr Sharma",v=>linkDraft.buyer=v);
+  ap(m, fld("Buyer name (optional)", bInp));
+
+  const eInp = mk("input","",{type:"date"}); eInp.value=linkDraft.expiry; eInp.style.width="100%";
+  eInp.addEventListener("change",()=>linkDraft.expiry=eInp.value);
+  const exBtns = mk("div","exp-btns");
+  [7,14,30,60,90].forEach(d=>{ const b=btn(`${d} days`,"",()=>{ linkDraft.expiry=plus(d); eInp.value=plus(d); }); exBtns.appendChild(b); });
+  ap(m, fld("Link expires on", ap(mk("div",""), eInp, exBtns)));
+
+  const foot = mk("div","modal-foot");
+  ap(foot, btn("Cancel","btn-sm",closeModal));
+  const goBtn = btn("Generate link","btn-primary btn-sm",()=>{
     if(!linkDraft.title.trim()){ toast("Enter a view title",false); return; }
-    if(!selected.length){ toast("Select at least one artwork",false); return; }
-    S.links.unshift({ id:uid(), slug:uid(), created:new Date().toISOString(), artworkIds:[...selected], ...linkDraft });
-    selected=[]; linkDraft={ title:"", buyer:"", expiry:plus(30) }; save(); closeModal();
-    adminTab="links"; toast("Private view link created — copy it from the Links tab"); renderAdmin();
+    if(!sel.length){ toast("Select at least one artwork",false); return; }
+    const selectedArtworks = S.artworks.filter(a=>sel.includes(a.id));
+    const viewData = { title:linkDraft.title, buyer:linkDraft.buyer, expiry:linkDraft.expiry, artworks: selectedArtworks };
+    const encoded  = encodeLink(viewData);
+    doneLink = `${location.origin}${location.pathname}?v=${encoded}`;
+    sel=[]; linkDraft={ title:"", buyer:"", expiry:plus(30) };
+    modal="linkDone"; renderAdmin();
   },"send");
-  foot.appendChild(goBtn); m.appendChild(foot); ov.appendChild(m); return ov;
+  ap(foot, goBtn);
+  ap(m, foot); ov.appendChild(m); return ov;
+}
+
+function buildLinkDoneModal(){
+  const ov = mk("div","ov"); ov.addEventListener("click",e=>{ if(e.target===ov) { modal=null; doneLink=""; renderAdmin(); } });
+  const m  = mk("div","modal");
+  const mh = mk("div","modal-head");
+  ap(mh, ap(mk("h3",""),tx("Your private view link")), btn("","x-btn",()=>{ modal=null; doneLink=""; renderAdmin(); },"x"));
+  ap(m, mh);
+
+  const note = mk("p",""); note.style.cssText="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6;";
+  note.textContent = "Copy this link and send it to your buyer via WhatsApp or email. It works on any device — no login needed.";
+  ap(m, note);
+
+  const box = mk("div","link-preview-box");
+  const urlBox = mk("div","link-preview-url"); urlBox.textContent=doneLink;
+  const copyBtn = btn("Copy link","copy-big btn-primary",()=>{
+    navigator.clipboard.writeText(doneLink).then(()=>toast("Link copied to clipboard")).catch(()=>{ prompt("Copy this link:",doneLink); });
+  },"copy");
+
+  const waLink = mk("a","footer-btn",{href:`https://wa.me/?text=${encodeURIComponent("Please view the private selection: "+doneLink)}`,target:"_blank"});
+  waLink.style.cssText="justify-content:center;margin-top:8px;width:100%;"; ap(waLink, ic("brand-whatsapp","color:#25D366;"), tx("Send via WhatsApp"));
+
+  ap(box, ap(mk("p",""),tx("Your link:")), urlBox, copyBtn, waLink);
+  ap(m, box);
+
+  const previewLink = mk("a",""); previewLink.href=doneLink; previewLink.target="_blank";
+  previewLink.style.cssText="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px;margin-top:12px;justify-content:center;";
+  ap(previewLink, ic("external-link"), tx("Preview buyer view"));
+  ap(m, previewLink);
+  ov.appendChild(m); return ov;
 }
 
 function buildAddArtModal(){
-  const ov=el("div","ov",[]); ov.addEventListener("click",e=>{ if(e.target===ov) closeModal(); });
-  const m=el("div","modal",[]);
-  m.appendChild(el("div","modal-head",[ el("h3","",[txt("Add artwork manually")]), btn("","close-btn",closeModal,"x") ]));
-  const fields=[["title","Title *"],["artist","Artist"],["year","Year"],["medium","Medium"],["dimensions","Dimensions"],["category","Category"],["image","Image URL"]];
-  fields.forEach(([k,l])=>{ const i=inp(artDraft[k],"",v=>artDraft[k]=v); m.appendChild(field(l,i)); });
-  const ta=document.createElement("textarea"); ta.rows=3; ta.style.width="100%"; ta.value=artDraft.description||""; ta.addEventListener("input",()=>artDraft.description=ta.value);
-  m.appendChild(field("Description",ta));
-  const foot=el("div","modal-foot",[]);
-  foot.appendChild(btn("Cancel","btn-sm",closeModal));
-  foot.appendChild(btn("Add artwork","btn-primary btn-sm",()=>{
+  const ov = mk("div","ov"); ov.addEventListener("click",e=>{ if(e.target===ov) closeModal(); });
+  const m  = mk("div","modal");
+  ap(m, ap(mk("div","modal-head"), ap(mk("h3",""),tx("Add artwork manually")), btn("","x-btn",closeModal,"x")));
+  [["title","Title *"],["artist","Artist"],["year","Year"],["medium","Medium"],["dimensions","Dimensions"],["category","Category"],["image","Image URL"]].forEach(([k,l])=>{
+    ap(m, fld(l, inp(artDraft[k],"",v=>artDraft[k]=v)));
+  });
+  const ta = mk("textarea"); ta.rows=3; ta.style.width="100%"; ta.value=artDraft.description||""; ta.addEventListener("input",()=>artDraft.description=ta.value);
+  ap(m, fld("Description",ta));
+  const foot = mk("div","modal-foot");
+  ap(foot, btn("Cancel","btn-sm",closeModal), btn("Add artwork","btn-primary btn-sm",()=>{
     if(!artDraft.title?.trim()){ toast("Title is required",false); return; }
-    S.artworks.unshift({...artDraft,id:uid()}); artDraft={ title:"",artist:"",year:"",medium:"",dimensions:"",category:"",image:"",description:"" };
-    save(); closeModal(); toast("Artwork added"); renderAdmin();
+    S.artworks.unshift({...artDraft,id:uid()});
+    artDraft={ title:"",artist:"",year:"",medium:"",dimensions:"",category:"",image:"",description:"" };
+    persist(); closeModal(); toast("Artwork added"); renderAdmin();
   }));
-  m.appendChild(foot); ov.appendChild(m); return ov;
+  ap(m,foot); ov.appendChild(m); return ov;
 }
 
-/* lightbox */
+/* ── lightbox (admin) ── */
 function buildLightbox(a, buyerMode, onEnquire){
-  const lb=el("div","lb",[]);
-  const xb=el("button","lb-x",[ic("x")]); xb.setAttribute("aria-label","Close");
-  function close(){ if(buyerMode) lb.remove(); else { lbWork=null; renderAdmin(); } }
-  xb.addEventListener("click",close);
-  lb.addEventListener("click",e=>{ if(e.target===lb) close(); });
-  const escFn=e=>{ if(e.key==="Escape"){ close(); document.removeEventListener("keydown",escFn); } };
-  document.addEventListener("keydown",escFn);
+  const lb = mk("div","lb");
+  const xb = mk("button","lb-x",{"aria-label":"Close"}); xb.appendChild(ic("x"));
+  function closeLb(){ if(buyerMode) lb.remove(); else { lbWork=null; renderAdmin(); } }
+  xb.addEventListener("click",closeLb); lb.addEventListener("click",e=>{ if(e.target===lb) closeLb(); });
+  const esc=e=>{ if(e.key==="Escape"){ closeLb(); document.removeEventListener("keydown",esc); } };
+  document.addEventListener("keydown",esc);
   lb.appendChild(xb);
-
-  const inner=el("div","lb-inner",[]);
-  const iw=el("div","lb-img",[]);
-  if(a.image){ const img=document.createElement("img"); img.src=a.image; img.alt=a.title; img.onerror=()=>{iw.innerHTML="";iw.appendChild(ic("photo","no-img"));}; iw.appendChild(img); }
-  else iw.appendChild(ic("photo","no-img"));
+  const inner = mk("div","lb-inner");
+  const iw = mk("div","lb-img");
+  if(a.image){ const img=mk("img","",{src:a.image,alt:a.title}); img.onerror=()=>{iw.innerHTML="";ap(iw,ic("photo","no-img-icon"));}; iw.appendChild(img); }
+  else ap(iw,ic("photo","no-img-icon"));
   inner.appendChild(iw);
-
-  const info=el("div","lb-info",[
-    el("div","lb-artist",[txt(a.artist||"")]),
-    el("h2","lb-title",[txt(a.title)]),
-  ]);
+  const info = mk("div","lb-info");
+  ap(info, ap(mk("div","lb-artist"),tx(a.artist||"")), ap(mk("h2","lb-title"),tx(a.title)));
   [["Year",a.year],["Medium",a.medium],["Dimensions",a.dimensions],["Category",a.category]].forEach(([l,v])=>{
     if(!v) return;
-    const row=el("div","lb-row",[ el("span","lb-label",[txt(l)]), el("span","lb-val",[txt(v)]) ]);
-    info.appendChild(row);
+    ap(info, ap(mk("div","lb-row"), ap(mk("span","lb-label"),tx(l)), ap(mk("span","lb-val"),tx(v))));
   });
-  if(a.description) info.appendChild(el("p","lb-desc",[txt(a.description)]));
+  if(a.description) ap(info, ap(mk("p","lb-desc"),tx(a.description)));
   if(buyerMode&&onEnquire){
-    const eb=el("button","lb-enq",[ic("mail"),txt(" Enquire about this work")]);
-    eb.addEventListener("click",()=>{ lb.remove(); onEnquire(); });
-    info.appendChild(eb);
+    const eb=mk("button","lb-enq"); ap(eb,ic("mail"),tx(" Enquire about this work")); eb.addEventListener("click",()=>{ lb.remove(); onEnquire(); }); info.appendChild(eb);
   }
-  inner.appendChild(info); lb.appendChild(inner); return lb;
+  ap(inner,info); lb.appendChild(inner); return lb;
 }
 
-/* sync from sheet */
+/* ── sync helpers ── */
 async function doSyncNew(){
   syncMsg="Fetching from Google Sheets…"; renderAdmin();
   try{
-    const res=await fetch(CFG.sheetCsv);
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows=parseCSV(await res.text());
-    if(!rows.length) throw new Error("No rows found.");
+    const res=await fetch(CFG.sheetCsv); if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows=parseCSV(await res.text()); if(!rows.length) throw new Error("No rows found.");
     const existing=new Set(S.artworks.map(a=>(a.title+"|"+a.artist).toLowerCase()));
     const fresh=rows.filter(r=>!existing.has((r.title+"|"+r.artist).toLowerCase()));
-    S.artworks.push(...fresh); save();
-    syncMsg=`✓ ${rows.length} artworks found, ${fresh.length} new added`;
+    S.artworks.push(...fresh); persist();
+    syncMsg=`✓ ${rows.length} total, ${fresh.length} new added`;
     toast(`${fresh.length} new artworks added`);
   }catch(err){ syncMsg=""; toast("Could not load sheet: "+err.message,false); }
   renderAdmin();
@@ -614,128 +658,110 @@ async function doSyncNew(){
 async function doResync(){
   syncMsg="Re-syncing…"; renderAdmin();
   try{
-    const res=await fetch(CFG.sheetCsv);
-    if(!res.ok) throw new Error(`HTTP ${res.status}`);
-    const rows=parseCSV(await res.text());
-    if(!rows.length) throw new Error("No rows found.");
-    S.artworks=rows; selected=[]; save();
+    const res=await fetch(CFG.sheetCsv); if(!res.ok) throw new Error(`HTTP ${res.status}`);
+    const rows=parseCSV(await res.text()); if(!rows.length) throw new Error("No rows found.");
+    S.artworks=rows; sel=[]; persist();
     syncMsg=`✓ ${rows.length} artworks loaded`;
     toast(`Re-synced — ${rows.length} artworks`);
   }catch(err){ syncMsg=""; toast("Sync failed: "+err.message,false); }
   renderAdmin();
 }
 
-/* helpers */
-function buildEmpty(icon_,title,sub){
-  return el("div","empty",[ic(icon_),el("p","empty-title",[txt(title)]),el("p","",[txt(sub)])]);
-}
-
-/* ══ BUYER VIEW ══════════════════════════════════════════════════════════ */
-function renderBuyer(viewSlug){
+/* ══ BUYER VIEW ═══════════════════════════════════════════════════════ */
+function renderBuyer(data){
+  // data = { title, buyer, expiry, artworks: [...] }
   root.innerHTML="";
-  const link=S.links.find(l=>l.slug===viewSlug);
-  if(!link){ root.appendChild(buildGate("ti-lock","This link is invalid or has been removed.")); return; }
-  if(expired(link)){ root.appendChild(buildGate("ti-calendar-x","This private view has expired.")); return; }
+  const works = data.artworks||[];
+  const wrap  = mk("div","buyer-wrap");
 
-  const works=S.artworks.filter(a=>link.artworkIds.includes(a.id));
-  const wrap=el("div","buyer-wrap",[]);
-
-  /* ── nav with logo ── */
-  const logoWrap=el("div","gallery-logo-wrap",[]);
-  if(CFG.logoUrl){
-    const img=document.createElement("img"); img.src=CFG.logoUrl; img.alt=CFG.gallery; img.className="gallery-logo-img"; logoWrap.appendChild(img);
-  } else {
-    const logoText=el("div","",[
-      el("div","gallery-logo-text",[txt(CFG.gallery)]),
-      el("div","gallery-logo-tagline",[txt(CFG.tagline)]),
-    ]); logoWrap.appendChild(logoText);
+  /* nav */
+  const nav   = mk("div","buyer-nav");
+  const lWrap = mk("div","");
+  if(CFG.logoUrl){ const img=mk("img","",{src:CFG.logoUrl,alt:CFG.gallery}); img.style="height:40px;": lWrap.appendChild(img); }
+  else{
+    ap(lWrap, ap(mk("div","gallery-logo-text"),tx(CFG.gallery)), ap(mk("div","gallery-tagline"),tx(CFG.tagline)));
   }
-  const navRight=el("div","buyer-nav-right",[
-    el("span","",[txt(`${works.length} work${works.length!==1?"s":""}`)]),
-    el("br",""),
-    el("span","",[ txt(`Available until ${fmtDate(link.expiry)}`) ]),
-  ]);
-  wrap.appendChild(el("nav","buyer-nav",[logoWrap,navRight]));
+  const nr = mk("div","buyer-nav-right");
+  nr.innerHTML=`${works.length} work${works.length!==1?"s":""}<br>Available until ${fmtDate(data.expiry)}`;
+  ap(nav, lWrap, nr);
+  wrap.appendChild(nav);
 
-  /* ── hero ── */
-  const hero=el("div","buyer-hero",[
-    el("h1","",[txt(link.title)]),
-  ]);
-  if(link.buyer) hero.appendChild(el("p","",[ txt(`Private selection for ${link.buyer}`) ]));
+  /* hero */
+  const hero = mk("div","buyer-hero");
+  ap(hero, ap(mk("h1",""),tx(data.title)));
+  if(data.buyer) ap(hero, ap(mk("p",""),tx(`Private selection for ${data.buyer}`)));
   wrap.appendChild(hero);
 
-  /* ── grid ── */
+  /* grid */
   if(!works.length){
-    wrap.appendChild(buildEmpty("photo-off","No artworks in this view","Please contact the gallery."));
+    wrap.appendChild(buildEmpty("photo-off","No artworks","Please contact the gallery."));
   } else {
-    const grid=el("div","buyer-grid",[]);
+    const grid = mk("div","buyer-grid");
     works.forEach(a=>{
-      const card=el("div","buyer-card",[]);
-      const imgW=el("div","buyer-img",[]);
+      const card = mk("div","buyer-card");
+      const imgW = mk("div","buyer-img");
       if(a.image){
-        const img=document.createElement("img"); img.src=a.image; img.alt=a.title; img.onerror=()=>{imgW.innerHTML="";imgW.appendChild(ic("photo","no-img"));imgW.style.cursor="default";}; imgW.appendChild(img);
-      } else { imgW.appendChild(ic("photo","no-img")); imgW.style.cursor="default"; }
-      imgW.addEventListener("click",()=>{
-        wrap.appendChild(buildLightbox(a,true,()=>{ wrap.appendChild(buildInquiry(a,wrap)); }));
-      });
-      card.appendChild(imgW);
-      const body=el("div","",[
-        el("div","buyer-art-artist",[txt(a.artist||"")]),
-        el("div","buyer-art-title",[txt(a.title)]),
-        el("div","buyer-art-meta",[txt([a.medium,a.dimensions,a.year].filter(Boolean).join(" · "))]),
-      ]);
-      const enqBtn=el("button","btn-enq",[txt("Enquire")]);
-      enqBtn.addEventListener("click",()=>wrap.appendChild(buildInquiry(a,wrap)));
-      body.appendChild(enqBtn); card.appendChild(body); grid.appendChild(card);
+        const img=mk("img","",{src:a.image,alt:a.title}); img.onerror=()=>{imgW.innerHTML="";ap(imgW,ic("photo","no-img-icon"));imgW.style.cursor="default";}; imgW.appendChild(img);
+      } else { ap(imgW,ic("photo","no-img-icon")); imgW.style.cursor="default"; }
+      imgW.addEventListener("click",()=>ap(wrap, buildLightbox(a,true,()=>ap(wrap,buildInquiry(a,wrap)))));
+      const body = mk("div","");
+      ap(body,
+        ap(mk("div","buyer-artist"),tx(a.artist||"")),
+        ap(mk("div","buyer-title"),tx(a.title)),
+        ap(mk("div","buyer-meta"),tx([a.medium,a.dimensions,a.year].filter(Boolean).join(" · ")))
+      );
+      const enqBtn=mk("button","btn-enq"); enqBtn.textContent="Enquire";
+      enqBtn.addEventListener("click",()=>ap(wrap,buildInquiry(a,wrap)));
+      body.appendChild(enqBtn);
+      ap(card,imgW,body); grid.appendChild(card);
     });
     wrap.appendChild(grid);
   }
 
-  /* ── footer ── */
-  const footer=el("div","buyer-footer",[
-    el("div","footer-logo",[txt(CFG.gallery)]),
-    el("p","footer-copy",[txt(`Courtesy of ${CFG.gallery}. Copyright © the Artists.\nAll works subject to prior sale. Prices available on enquiry.`)]),
-    el("div","footer-contact",[
-      el("a","footer-btn",[ic("brand-whatsapp","color:#25D366;font-size:16px;"),txt("WhatsApp us")],{href:`https://wa.me/${CFG.whatsapp}`,target:"_blank"}),
-      el("a","footer-btn",[ic("mail","font-size:16px;"),txt("Email gallery")],{href:`mailto:${CFG.email}`}),
-    ]),
-  ]);
+  /* footer */
+  const footer = mk("div","buyer-footer");
+  ap(footer,
+    ap(mk("div","footer-logo"),tx(CFG.gallery)),
+    ap(mk("p","footer-copy"),tx(`Courtesy of ${CFG.gallery}. Copyright © the Artists.\nAll works subject to prior sale. Prices available on enquiry.`)),
+    ap(mk("div","footer-contact"),
+      ap(mk("a","footer-btn",{href:`https://wa.me/${CFG.whatsapp}`,target:"_blank"}), ic("brand-whatsapp","color:#25D366;font-size:16px;"), tx("WhatsApp us")),
+      ap(mk("a","footer-btn",{href:`mailto:${CFG.email}`}), ic("mail","font-size:16px;"), tx("Email gallery"))
+    )
+  );
   wrap.appendChild(footer);
   root.appendChild(wrap);
 }
 
-function buildInquiry(a,container){
+function buildInquiry(a, container){
   const waMsg=encodeURIComponent(`Hello, I'm interested in "${a.title}" by ${a.artist}${a.year?` (${a.year})`:""}. Could you please share details?`);
   const sub=encodeURIComponent(`Enquiry — "${a.title}" by ${a.artist}`);
-  const body=encodeURIComponent(`Dear ${CFG.gallery},\n\nI would like to enquire about:\n\nTitle: ${a.title}\nArtist: ${a.artist}${a.year?`\nYear: ${a.year}`:""}\n${a.medium?`Medium: ${a.medium}\n`:""}\nKindly share details at your convenience.\n\nThank you.`);
-  const ov=el("div","ov",[]); ov.addEventListener("click",e=>{ if(e.target===ov) ov.remove(); });
-  const m=el("div","modal",[]);
-  m.appendChild(el("div","modal-head",[ el("h3","",[txt("Enquire about this work")]), btn("","close-btn",()=>ov.remove(),"x") ]));
-  if(a.image){ const img=document.createElement("img"); img.src=a.image; img.alt=a.title; img.className="inq-thumb"; img.onerror=()=>img.remove(); m.appendChild(img); }
-  m.appendChild(el("p","",[ txt(a.title) ],{"style":"font-family:'Cormorant Garamond',serif;font-size:17px;margin-bottom:2px;"}));
-  m.appendChild(el("p","",[ txt(`${a.artist||""}${a.year?`, ${a.year}`:""}${a.medium?` · ${a.medium}`:""}`) ],{"style":"font-size:13px;color:var(--text2);margin-bottom:1.25rem;"}));
-  const waRow=el("a","contact-row",[
-    el("span","c-icon wa",[ic("brand-whatsapp")]),
-    el("div","",[el("div","c-label",[txt("WhatsApp")]),el("div","c-sub",[txt("Message us instantly")])]),
-    ic("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"),
-  ],{href:`https://wa.me/${CFG.whatsapp}?text=${waMsg}`,target:"_blank"});
-  const emRow=el("a","contact-row",[
-    el("span","c-icon em",[ic("mail")]),
-    el("div","",[el("div","c-label",[txt("Email gallery")]),el("div","c-sub",[txt(CFG.email)])]),
-    ic("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"),
-  ],{href:`mailto:${CFG.email}?subject=${sub}&body=${body}`});
-  m.appendChild(waRow); m.appendChild(emRow);
-  m.appendChild(el("p","",[ txt("We respond within one business day.") ],{"style":"font-size:11px;color:var(--text3);text-align:center;margin-top:16px;"}));
+  const body=encodeURIComponent(`Dear ${CFG.gallery},\n\nEnquiry:\n\nTitle: ${a.title}\nArtist: ${a.artist}${a.year?`\nYear: ${a.year}`:""}\n${a.medium?`Medium: ${a.medium}\n`:""}\nKindly share details.\n\nThank you.`);
+  const ov=mk("div","ov"); ov.addEventListener("click",e=>{ if(e.target===ov) ov.remove(); });
+  const m=mk("div","modal");
+  ap(m, ap(mk("div","modal-head"), ap(mk("h3",""),tx("Enquire about this work")), btn("","x-btn",()=>ov.remove(),"x")));
+  if(a.image){ const img=mk("img","inq-thumb",{src:a.image,alt:a.title}); img.onerror=()=>img.remove(); m.appendChild(img); }
+  const artTitle=mk("p",""); artTitle.style="font-family:'Cormorant Garamond',serif;font-size:17px;margin-bottom:2px;"; artTitle.textContent=a.title;
+  const artSub=mk("p",""); artSub.style="font-size:13px;color:var(--text2);margin-bottom:1.25rem;"; artSub.textContent=`${a.artist||""}${a.year?`, ${a.year}`:""}${a.medium?` · ${a.medium}`:""}`;
+  ap(m, artTitle, artSub);
+  const waRow=mk("a","contact-row",{href:`https://wa.me/${CFG.whatsapp}?text=${waMsg}`,target:"_blank"});
+  const emRow=mk("a","contact-row",{href:`mailto:${CFG.email}?subject=${sub}&body=${body}`});
+  ap(waRow, ap(mk("span","c-icon wa"),ic("brand-whatsapp")), ap(mk("div",""), ap(mk("div","c-label"),tx("WhatsApp")), ap(mk("div","c-sub"),tx("Message us instantly"))), ic("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"));
+  ap(emRow, ap(mk("span","c-icon em"),ic("mail")), ap(mk("div",""), ap(mk("div","c-label"),tx("Email gallery")), ap(mk("div","c-sub"),tx(CFG.email))), ic("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"));
+  ap(m, waRow, emRow, ap(mk("p",""),tx("We respond within one business day.")));
+  m.querySelector("p:last-child").style="font-size:11px;color:var(--text3);text-align:center;margin-top:14px;";
   ov.appendChild(m); return ov;
 }
 
-function buildGate(cls,msg){
-  const g=el("div","gate",[
-    el("i","",[],(()=>{ const o={}; o["class"]=`ti ${cls}`; o["aria-hidden"]="true"; o["style"]="font-size:48px;color:var(--text3);"; return o; })()),
-    el("h2","",[txt(msg)]),
-    el("p","",[txt("Please contact the gallery for assistance.")]),
-  ]);
-  return g;
+/* ── shared helpers ── */
+function buildEmpty(icon_, title, sub){
+  const d=mk("div","empty"); ap(d, ic(icon_), ap(mk("p","empty-title"),tx(title)), ap(mk("p",""),tx(sub))); return d;
+}
+function renderGate(cls, msg){
+  root.innerHTML="";
+  const g=mk("div","gate");
+  const gi=mk("i",""); gi.className=`ti ${cls}`; gi.setAttribute("aria-hidden","true"); gi.style="font-size:48px;color:var(--text3);";
+  ap(g, gi, ap(mk("h2",""),tx(msg)), ap(mk("p",""),tx("Please contact the gallery for assistance.")));
+  root.appendChild(g);
 }
 </script>
 </body>
