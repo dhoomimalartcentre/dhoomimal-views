@@ -1,1 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Dhoomimal Art Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#fff;--bg2:#f8f7f4;
+  --text:#1c1c1a;--text2:#6b6b66;--text3:#a0a09a;
+  --border:rgba(0,0,0,0.09);--border2:rgba(0,0,0,0.17);
+  --red:#8b1f1f;--red-bg:#fceaea;
+  --green:#0a5c3a;--green-bg:#e2f5ec;
+  --blue:#0c447c;--blue-bg:#e6f0fb;
+  --r:6px;--rl:10px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+input,select,textarea,button{font-family:inherit;font-size:13px;outline:none;border:0.5px solid var(--border2);border-radius:var(--r);background:var(--bg);color:var(--text);padding:8px 11px;transition:border-color .15s,background .15s;}
+input:focus,select:focus,textarea:focus{border-color:#888;}
+button{cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
+button:hover{background:var(--bg2);}
+button:active{transform:scale(.98);}
+a{color:inherit;text-decoration:none;}
 
+/* login */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+.login-box{width:100%;max-width:340px;text-align:center;padding:2rem;}
+.login-logo{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;letter-spacing:.04em;margin-bottom:4px;}
+.login-sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--text3);margin-bottom:2.5rem;}
+.login-pw{width:100%;text-align:center;font-size:14px;padding:11px;margin-bottom:12px;letter-spacing:.08em;}
+.login-btn{width:100%;justify-content:center;padding:11px;letter-spacing:.05em;font-size:13px;}
+.login-err{font-size:12px;color:var(--red);margin-top:8px;min-height:18px;}
+
+/* admin */
+.page{max-width:1080px;margin:0 auto;padding:0 1.5rem 5rem;}
+.admin-bar{display:flex;align-items:center;justify-content:space-between;padding:1rem 0;border-bottom:.5px solid var(--border);margin-bottom:1.5rem;flex-wrap:wrap;gap:10px;}
+.admin-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;letter-spacing:.03em;}
+.admin-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.badge{font-size:10px;padding:3px 9px;border:.5px solid var(--border);border-radius:var(--r);color:var(--text3);letter-spacing:.1em;text-transform:uppercase;}
+.tabs{display:flex;gap:2px;margin-bottom:1.5rem;}
+.tab{font-size:13px;padding:6px 16px;border-radius:var(--r);border:.5px solid transparent;background:transparent;color:var(--text2);}
+.tab:hover{background:var(--bg2);}
+.tab.active{font-weight:500;background:var(--bg2);border-color:var(--border2);color:var(--text);}
+
+/* sync bar */
+.sync-bar{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.sync-title{font-size:13px;font-weight:500;margin-bottom:2px;}
+.sync-sub{font-size:12px;color:var(--text2);}
+.sync-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap;}
+
+/* filters */
+.filter-row{display:flex;gap:8px;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center;}
+.search-wrap{position:relative;flex:1 1 220px;}
+.search-wrap .si{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3);pointer-events:none;}
+.search-wrap input{padding-left:34px;width:100%;}
+
+/* art grid */
+.art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:14px;}
+.art-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rl);overflow:hidden;cursor:pointer;transition:border-color .2s;}
+.art-card:hover{border-color:var(--border2);}
+.art-card.sel{outline:2px solid #4a7fd4;outline-offset:2px;}
+.art-img{aspect-ratio:4/5;background:var(--bg2);overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;}
+.art-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.no-img{font-size:32px;color:var(--text3);}
+.sel-ov{position:absolute;inset:0;background:rgba(30,80,200,.15);display:flex;align-items:center;justify-content:center;}
+.sel-ck{width:28px;height:28px;border-radius:50%;background:var(--blue-bg);display:flex;align-items:center;justify-content:center;color:var(--blue);font-size:16px;}
+.art-body{padding:9px 11px 11px;}
+.art-title{font-weight:500;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px;}
+.art-sub{font-size:12px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:1px;}
+.art-cat{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px;}
+.art-actions{display:flex;gap:5px;margin-top:9px;}
+.btn-xs{font-size:11px;padding:3px 8px;}
+.btn-xs.danger{color:var(--red);border-color:transparent;background:transparent;margin-left:auto;}
+
+/* link list */
+.link-list{display:flex;flex-direction:column;gap:10px;}
+.link-card{background:var(--bg);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;}
+.link-info{flex:1;min-width:200px;}
+.link-title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+.link-name{font-weight:500;font-size:15px;}
+.link-buyer{font-size:13px;color:var(--text2);}
+.link-url{font-size:11px;font-family:monospace;color:var(--text2);word-break:break-all;margin:4px 0 7px;background:var(--bg2);padding:6px 8px;border-radius:var(--r);}
+.link-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--text2);}
+.link-meta i{font-size:13px;vertical-align:-1px;margin-right:3px;}
+.link-btns{display:flex;gap:6px;flex-shrink:0;align-items:flex-start;flex-wrap:wrap;}
+.pill{display:inline-block;font-size:11px;padding:2px 9px;border-radius:var(--r);}
+.pill-green{background:var(--green-bg);color:var(--green);}
+.pill-red{background:var(--red-bg);color:var(--red);}
+
+/* modal */
+.ov{position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:20px;}
+.modal{background:var(--bg);border-radius:var(--rl);border:.5px solid var(--border);padding:1.5rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.modal-head h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;}
+.x-btn{background:transparent;border:none;font-size:20px;color:var(--text2);padding:2px;}
+.field{margin-bottom:12px;}
+.field label{font-size:12px;color:var(--text2);display:block;margin-bottom:4px;letter-spacing:.03em;}
+.field input,.field select,.field textarea{width:100%;}
+.field textarea{resize:vertical;}
+.exp-row{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
+.exp-row button{font-size:11px;padding:3px 9px;}
+.modal-foot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px;}
+
+/* done modal */
+.done-box{background:var(--bg2);border:.5px solid var(--border);border-radius:var(--rl);padding:1rem 1.25rem;margin-top:1rem;}
+.done-url{font-size:11px;font-family:monospace;word-break:break-all;background:var(--bg);border:.5px solid var(--border);border-radius:var(--r);padding:8px 10px;margin-bottom:10px;color:var(--text);line-height:1.5;}
+.copy-big{width:100%;justify-content:center;font-size:13px;padding:9px;font-weight:500;margin-bottom:8px;}
+.wa-big{width:100%;justify-content:center;font-size:13px;padding:9px;text-decoration:none;border:.5px solid var(--border2);border-radius:var(--r);display:flex;align-items:center;gap:7px;}
+.wa-big:hover{background:var(--bg2);}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:900;background:rgba(6,6,6,.93);display:flex;align-items:center;justify-content:center;padding:24px;}
+.lb-x{position:fixed;top:16px;right:16px;background:transparent;border:none;color:rgba(255,255,255,.5);font-size:26px;cursor:pointer;line-height:1;z-index:901;}
+.lb-inner{display:flex;gap:40px;max-width:900px;width:100%;align-items:flex-start;}
+.lb-img-wrap{flex:0 0 auto;max-width:54%;max-height:82vh;}
+.lb-img-wrap img{max-width:100%;max-height:82vh;object-fit:contain;border-radius:2px;display:block;}
+.lb-info{color:#fff;padding-top:6px;flex:1;min-width:0;}
+.lb-artist{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.38);margin-bottom:10px;}
+.lb-title{font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1.2;margin-bottom:18px;color:#fff;font-weight:300;}
+.lb-row{margin-bottom:7px;}
+.lb-label{font-size:10px;color:rgba(255,255,255,.32);text-transform:uppercase;letter-spacing:.12em;display:block;}
+.lb-val{font-size:14px;color:rgba(255,255,255,.72);}
+.lb-desc{font-size:13px;color:rgba(255,255,255,.45);line-height:1.75;margin-top:16px;border-top:.5px solid rgba(255,255,255,.1);padding-top:16px;}
+.lb-enq{margin-top:22px;font-size:13px;padding:9px 18px;background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.25);border-radius:var(--r);color:#fff;cursor:pointer;}
+
+/* buyer */
+.buyer-wrap{max-width:1060px;margin:0 auto;padding:0 1.5rem 5rem;}
+.buyer-nav{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 0 1.25rem;border-bottom:.5px solid var(--border);margin-bottom:2.5rem;}
+.gallery-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;letter-spacing:.04em;line-height:1.1;}
+.gallery-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--text3);margin-top:3px;}
+.buyer-nav-right{font-size:12px;color:var(--text3);text-align:right;line-height:1.6;}
+.buyer-hero{margin-bottom:2.5rem;}
+.buyer-hero h1{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;letter-spacing:.01em;margin-bottom:6px;line-height:1.15;}
+.buyer-hero p{font-size:13px;color:var(--text2);}
+.buyer-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px;}
+.buyer-card-img{aspect-ratio:4/5;background:var(--bg2);overflow:hidden;cursor:zoom-in;display:flex;align-items:center;justify-content:center;margin-bottom:12px;}
+.buyer-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
+.buyer-card-img:hover img{transform:scale(1.04);}
+.b-artist{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;}
+.b-title{font-family:'Cormorant Garamond',serif;font-size:18px;margin-bottom:3px;line-height:1.25;}
+.b-meta{font-size:12px;color:var(--text2);margin-bottom:10px;line-height:1.5;}
+.btn-enq{width:100%;font-size:12px;padding:8px;justify-content:center;letter-spacing:.05em;}
+
+/* buyer footer */
+.buyer-footer{margin-top:5rem;padding-top:2rem;border-top:.5px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+.footer-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;letter-spacing:.04em;}
+.footer-copy{font-size:11px;color:var(--text3);line-height:1.8;}
+.footer-btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+.footer-btn{font-size:12px;padding:8px 18px;border:.5px solid var(--border2);border-radius:var(--r);display:inline-flex;align-items:center;gap:7px;}
+.footer-btn:hover{background:var(--bg2);}
+
+/* inquiry */
+.inq-thumb{width:100%;height:150px;object-fit:cover;border-radius:var(--r);margin-bottom:14px;display:block;}
+.c-row{display:flex;align-items:center;gap:12px;padding:13px 14px;border:.5px solid var(--border);border-radius:var(--rl);text-decoration:none;color:var(--text);margin-bottom:10px;transition:background .15s;}
+.c-row:hover{background:var(--bg2);}
+.c-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;}
+.c-icon.wa{background:#e4f8ed;color:#25D366;}
+.c-icon.em{background:var(--bg2);color:var(--text2);}
+.c-label{font-weight:500;font-size:14px;}
+.c-sub{font-size:12px;color:var(--text2);}
+
+/* gate & empty */
+.gate{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:2rem;}
+.gate i{font-size:48px;color:var(--text3);}
+.gate h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;}
+.gate p{font-size:13px;color:var(--text2);}
+.empty{text-align:center;padding:4rem 1rem;color:var(--text3);}
+.empty i{font-size:38px;display:block;margin-bottom:12px;}
+.empty-t{font-size:15px;font-weight:500;color:var(--text2);margin-bottom:5px;}
+.empty p{font-size:13px;}
+
+/* toast */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--bg);border-radius:var(--r);padding:10px 20px;font-size:13px;z-index:9999;pointer-events:none;white-space:nowrap;border:.5px solid var(--border);display:flex;align-items:center;gap:6px;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.toast.ok{border-color:#1d9e75;color:var(--green);}
+.toast.err{border-color:#c0392b;color:var(--red);}
+
+.btn-sm{font-size:12px;padding:6px 12px;}
+.btn-p{font-weight:500;}
+.btn-d{color:var(--red);border-color:var(--red);}
+
+@media(max-width:640px){
+  .lb-inner{flex-direction:column;} .lb-img-wrap{max-width:100%;}
+  .art-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px;}
+  .buyer-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}
+  .buyer-hero h1{font-size:28px;}
+  .buyer-nav{flex-direction:column;align-items:flex-start;gap:8px;}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+/* ══ CONFIG — update before uploading ════════════════════════════════ */
+var CFG = {
+  gallery:  "Dhoomimal Art Centre",
+  tagline:  "New Delhi · Est. 1936",
+  logoUrl:  "",
+  whatsapp: "919810000000",
+  email:    "gallery@dhoomimal.com",
+  password: "dhoomimal2024",
+  sheet:    "https://docs.google.com/spreadsheets/d/e/2PACX-1vRxGBn7IifAiexzIT-It_xhZ8D49JYShlUuMc9FJ-bO0Qzsq90jm32Y6o4cVMnBbbZYfUgVmpBEj493/pub?output=csv"
+};
+
+/* ══ STATE ═══════════════════════════════════════════════════════════ */
+var STORE = "dac_v5";
+var artworks = [];
+try { var _d = JSON.parse(localStorage.getItem(STORE)||"{}"); artworks = _d.artworks||[]; } catch(e){}
+function persist(){ try{ localStorage.setItem(STORE, JSON.stringify({artworks:artworks})); }catch(e){} }
+
+var sel      = [];
+var adminTab = "artworks";
+var qSearch  = "";
+var qArtist  = "All";
+var qCat     = "All";
+var syncMsg  = "";
+var curModal = null;
+var lbArtwork= null;
+var doneUrl  = "";
+var lDraft   = { title:"", buyer:"", expiry: dplus(30) };
+var aDraft   = { title:"",artist:"",year:"",medium:"",dimensions:"",category:"",image:"",description:"" };
+
+/* ══ UTILS ═══════════════════════════════════════════════════════════ */
+function uid(){ return Math.random().toString(36).slice(2,14) + Math.random().toString(36).slice(2,8); }
+function dplus(n){ var d=new Date(); d.setDate(d.getDate()+n); return d.toISOString().split("T")[0]; }
+function fmtDate(iso){ return iso ? new Date(iso).toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"}) : ""; }
+function isExpired(exp){ return exp && new Date(exp+"T23:59:59") < new Date(); }
+function loggedIn(){ return sessionStorage.getItem("dac_auth")==="1"; }
+function getViewParam(){ return new URLSearchParams(location.search).get("v"); }
+
+function encodeView(obj){ return btoa(unescape(encodeURIComponent(JSON.stringify(obj)))); }
+function decodeView(s){ try{ return JSON.parse(decodeURIComponent(escape(atob(s)))); }catch(e){ return null; } }
+
+var toastTimer;
+function showToast(msg, ok){
+  document.querySelectorAll(".toast").forEach(function(t){ t.remove(); });
+  var t = div("toast "+(ok!==false?"ok":"err"));
+  t.appendChild(mkIcon(ok!==false?"check":"alert-circle"));
+  t.appendChild(document.createTextNode(msg));
+  document.body.appendChild(t);
+  clearTimeout(toastTimer); toastTimer = setTimeout(function(){ t.remove(); }, 3200);
+}
+
+/* ══ DOM HELPERS ══════════════════════════════════════════════════════ */
+function div(cls){ var d=document.createElement("div"); if(cls) d.className=cls; return d; }
+function el(tag,cls){ var d=document.createElement(tag); if(cls) d.className=cls; return d; }
+function txt(s){ return document.createTextNode(String(s||"")); }
+function mkIcon(name, style){
+  var i=document.createElement("i");
+  i.className="ti ti-"+name;
+  i.setAttribute("aria-hidden","true");
+  if(style) i.style.cssText=style;
+  return i;
+}
+function ap(parent){
+  for(var i=1;i<arguments.length;i++){
+    var c=arguments[i];
+    if(c==null||c===false) continue;
+    if(typeof c==="string") parent.appendChild(txt(c));
+    else parent.appendChild(c);
+  }
+  return parent;
+}
+function mkBtn(label, cls, onClick, iconName){
+  var b=el("button",cls||"");
+  if(iconName) b.appendChild(mkIcon(iconName));
+  if(label) b.appendChild(txt(label));
+  b.addEventListener("click",onClick);
+  return b;
+}
+function mkInput(val,ph,onInput,type){
+  var i=el("input",""); if(type) i.type=type;
+  i.value=val||""; if(ph) i.placeholder=ph;
+  i.addEventListener("input",function(){ onInput(i.value); });
+  return i;
+}
+function mkField(label,child){
+  var f=div("field");
+  var lbl=el("label",""); lbl.textContent=label;
+  ap(f,lbl,child);
+  return f;
+}
+function mkSelect(opts,current,onChange){
+  var s=el("select",""); s.style.fontSize="13px";
+  opts.forEach(function(o){ var op=el("option",""); op.value=o; op.textContent=o; if(o===current) op.selected=true; s.appendChild(op); });
+  s.addEventListener("change",function(){ onChange(s.value); });
+  return s;
+}
+
+/* ══ CSV PARSER ═══════════════════════════════════════════════════════ */
+function parseCSV(text){
+  var lines=text.trim().split(/\r?\n/).filter(Boolean);
+  if(lines.length<2) return [];
+  function splitRow(line){
+    var cells=[],cur="",inQ=false;
+    for(var i=0;i<line.length;i++){
+      var c=line[i];
+      if(c==='"'&&!inQ){inQ=true;continue;}
+      if(c==='"'&&inQ&&line[i+1]==='"'){cur+='"';i++;continue;}
+      if(c==='"'&&inQ){inQ=false;continue;}
+      if(c===','&&!inQ){cells.push(cur.trim());cur="";continue;}
+      cur+=c;
+    }
+    cells.push(cur.trim()); return cells;
+  }
+  var hdrs=splitRow(lines[0]).map(function(h){ return h.toLowerCase().replace(/\s+/g," ").trim(); });
+  function col(){
+    for(var a=0;a<arguments.length;a++){
+      var idx=hdrs.findIndex(function(h){ return h.indexOf(arguments[a])!==-1; }.bind(null,arguments[a]));
+      if(idx!==-1) return idx;
+    }
+    return -1;
+  }
+  var iT=col("title","name","artwork"), iA=col("artist","painter","author"),
+      iY=col("year","date"),            iM=col("medium","material"),
+      iD=col("dimension","size"),       iC=col("category","type","genre","series"),
+      iI=col("image","photo","url","img"), iDe=col("desc","note","detail","about");
+  return lines.slice(1).map(function(line,i){
+    var r=splitRow(line);
+    function g(idx){ return (idx!==-1&&r[idx]) ? r[idx].trim() : ""; }
+    return { id:uid(), title:g(iT)||("Work "+(i+1)), artist:g(iA), year:g(iY), medium:g(iM), dimensions:g(iD), category:g(iC), image:g(iI), description:g(iDe) };
+  }).filter(function(a){ return a.title && a.title.indexOf("Work 0")===-1; });
+}
+
+/* ══ ROUTER ═══════════════════════════════════════════════════════════ */
+var root = document.getElementById("root");
+var viewParam = getViewParam();
+if(viewParam){
+  var viewData = decodeView(viewParam);
+  if(!viewData) renderGate("ti-lock","This link is invalid or cannot be read.");
+  else if(isExpired(viewData.expiry)) renderGate("ti-calendar-x","This private view has expired.");
+  else renderBuyer(viewData);
+} else {
+  if(loggedIn()) renderAdmin();
+  else renderLogin();
+}
+
+/* ══ LOGIN ════════════════════════════════════════════════════════════ */
+function renderLogin(){
+  root.innerHTML="";
+  var screen=div("login-screen");
+  var box=div("login-box");
+  var logo=div("login-logo"); logo.textContent=CFG.gallery;
+  var sub=div("login-sub");   sub.textContent="Private Views · Admin";
+  var pw=el("input","login-pw"); pw.type="password"; pw.placeholder="Enter password";
+  var btn=el("button","login-btn"); btn.textContent="Sign in";
+  var err=div("login-err");
+  function tryLogin(){
+    if(pw.value===CFG.password){ sessionStorage.setItem("dac_auth","1"); renderAdmin(); }
+    else{ err.textContent="Incorrect password."; pw.value=""; pw.focus(); }
+  }
+  btn.addEventListener("click",tryLogin);
+  pw.addEventListener("keydown",function(e){ if(e.key==="Enter") tryLogin(); });
+  ap(box,logo,sub,pw,btn,err);
+  ap(screen,box);
+  ap(root,screen);
+  setTimeout(function(){ pw.focus(); },60);
+}
+
+/* ══ ADMIN ════════════════════════════════════════════════════════════ */
+function renderAdmin(){
+  root.innerHTML="";
+  root.appendChild(buildAdmin());
+}
+
+function buildAdmin(){
+  var wrap=div("page");
+
+  /* header */
+  var right=div("admin-right");
+  if(sel.length>0){
+    var cb=mkBtn("Create private view ("+sel.length+" selected)","btn-sm btn-p",function(){ openModal("link"); },"send");
+    cb.style.fontSize="13px"; cb.style.padding="7px 14px";
+    right.appendChild(cb);
+  }
+  var bdg=el("span","badge"); bdg.textContent="ADMIN";
+  var logout=mkBtn("Sign out","btn-sm",function(){ sessionStorage.removeItem("dac_auth"); renderLogin(); },"logout");
+  ap(right,bdg,logout);
+  var logo=div("admin-logo"); logo.textContent=CFG.gallery;
+  var bar=div("admin-bar"); ap(bar,logo,right);
+  wrap.appendChild(bar);
+
+  /* tabs */
+  var tabsEl=div("tabs");
+  [["artworks","photo","Artworks ("+artworks.length+")"],["links","link","How to share"]].forEach(function(t){
+    var tb=mkBtn(t[2],"tab"+(adminTab===t[0]?" active":""),function(name){ adminTab=name; renderAdmin(); }.bind(null,t[0]),t[1]);
+    tabsEl.appendChild(tb);
+  });
+  wrap.appendChild(tabsEl);
+
+  if(adminTab==="artworks") wrap.appendChild(buildArtTab());
+  if(adminTab==="links")    wrap.appendChild(buildShareTab());
+  if(curModal==="link")     wrap.appendChild(buildLinkModal());
+  if(curModal==="done")     wrap.appendChild(buildDoneModal());
+  if(curModal==="addArt")   wrap.appendChild(buildAddArtModal());
+  if(lbArtwork)             wrap.appendChild(buildLightbox(lbArtwork,false,null));
+
+  return wrap;
+}
+
+/* ── artworks tab ── */
+function buildArtTab(){
+  var frag=document.createDocumentFragment();
+
+  var sb=div("sync-bar");
+  var si=div(""); var st=div("sync-title"); st.textContent="Google Sheets · Dhoomimal Catalogue";
+  var ss=div("sync-sub"); ss.textContent=syncMsg||"Sync artworks from your published Google Sheet.";
+  ap(si,st,ss);
+  var sbtns=div("sync-btns");
+  ap(sbtns,
+    mkBtn("Re-sync all","btn-sm",doResync,"refresh"),
+    mkBtn("Add new","btn-sm",doSyncNew,"cloud-download"),
+    mkBtn("Add manually","btn-sm",function(){ openModal("addArt"); },"plus")
+  );
+  ap(sb,si,sbtns); frag.appendChild(sb);
+
+  var fr=div("filter-row");
+  var sw=div("search-wrap");
+  var si2=mkIcon("search"); si2.className+=" si"; sw.appendChild(si2);
+  var sinp=mkInput(qSearch,"Search artist, title, medium, year…",function(v){ qSearch=v; refreshGrid(grid); });
+  sw.appendChild(sinp); fr.appendChild(sw);
+
+  var artists=["All"]; var cats=["All"];
+  artworks.forEach(function(a){
+    if(a.artist&&artists.indexOf(a.artist)===-1) artists.push(a.artist);
+    if(a.category&&cats.indexOf(a.category)===-1) cats.push(a.category);
+  });
+  artists.sort(); cats.sort();
+  if(artists.length>1) fr.appendChild(mkSelect(artists,qArtist,function(v){ qArtist=v; refreshGrid(grid); }));
+  if(cats.length>1)    fr.appendChild(mkSelect(cats,qCat,function(v){ qCat=v; refreshGrid(grid); }));
+
+  var filtered=getFiltered();
+  if(filtered.length>0){
+    if(sel.length===filtered.length)
+      fr.appendChild(mkBtn("Clear selection","btn-sm",function(){ sel=[]; renderAdmin(); }));
+    else
+      fr.appendChild(mkBtn("Select all ("+filtered.length+")","btn-sm",function(){ sel=filtered.map(function(a){ return a.id; }); renderAdmin(); }));
+  }
+  frag.appendChild(fr);
+
+  var grid=div("art-grid");
+  refreshGrid(grid);
+  frag.appendChild(grid);
+  return frag;
+}
+
+function getFiltered(){
+  var q=qSearch.toLowerCase();
+  return artworks.filter(function(a){
+    var mQ=!q||[a.title,a.artist,a.medium,a.category,a.year].some(function(v){ return v&&v.toLowerCase().indexOf(q)!==-1; });
+    return mQ&&(qArtist==="All"||a.artist===qArtist)&&(qCat==="All"||a.category===qCat);
+  });
+}
+
+function refreshGrid(grid){
+  grid.innerHTML="";
+  var f=getFiltered();
+  if(!artworks.length){ grid.appendChild(buildEmpty("cloud-download","No artworks yet","Click Add new or Re-sync all above.")); return; }
+  if(!f.length){ grid.appendChild(buildEmpty("search-off","No results","Try adjusting your search or filters.")); return; }
+  f.forEach(function(a){ grid.appendChild(buildAdminCard(a)); });
+}
+
+function buildAdminCard(a){
+  var isSel=sel.indexOf(a.id)!==-1;
+  var card=div("art-card"+(isSel?" sel":""));
+  card.addEventListener("click",function(){
+    var idx=sel.indexOf(a.id);
+    if(idx!==-1) sel.splice(idx,1); else sel.push(a.id);
+    renderAdmin();
+  });
+  var imgW=div("art-img");
+  if(a.image){
+    var img=el("img",""); img.src=a.image; img.alt=a.title;
+    img.onerror=function(){ imgW.innerHTML=""; imgW.appendChild(mkIcon("photo","font-size:32px;color:var(--text3);")); };
+    imgW.appendChild(img);
+  } else { imgW.appendChild(mkIcon("photo","font-size:32px;color:var(--text3);")); }
+  if(isSel){
+    var ov=div("sel-ov"); var ck=div("sel-ck"); ck.appendChild(mkIcon("check")); ov.appendChild(ck); imgW.appendChild(ov);
+  }
+  card.appendChild(imgW);
+  var body=div("art-body");
+  var tl=div("art-title"); tl.textContent=a.title;
+  var sb=div("art-sub"); sb.textContent=(a.artist||"")+(a.year?", "+a.year:"");
+  var sm=div("art-sub"); sm.textContent=a.medium||""; sm.style.color="var(--text3)"; sm.style.fontSize="11px";
+  ap(body,tl,sb,sm);
+  if(a.category){ var cat=div("art-cat"); cat.textContent=a.category; body.appendChild(cat); }
+  var acts=div("art-actions");
+  var vb=mkBtn("View","btn-xs",function(e){ e.stopPropagation(); lbArtwork=a; renderAdmin(); },"eye");
+  var db=mkBtn("","btn-xs danger",function(e){
+    e.stopPropagation();
+    artworks=artworks.filter(function(x){ return x.id!==a.id; });
+    sel=sel.filter(function(x){ return x!==a.id; });
+    persist(); showToast("Artwork removed"); renderAdmin();
+  },"trash");
+  ap(acts,vb,db); body.appendChild(acts); card.appendChild(body);
+  return card;
+}
+
+/* ── share tab ── */
+function buildShareTab(){
+  var wrap=div("");
+  var info=div("sync-bar"); info.style.flexDirection="column"; info.style.alignItems="flex-start";
+  var t=div("sync-title"); t.textContent="How to create a private view";
+  var s=div("sync-sub"); s.textContent="1. Go to Artworks tab  2. Click artworks to select them (blue tick appears)  3. Click \"Create private view\"  4. Set title, buyer name and expiry  5. Copy the link and send to buyer via WhatsApp or email. The link works on ANY device — no login needed.";
+  ap(info,t,s); wrap.appendChild(info);
+  return wrap;
+}
+
+/* ── modals ── */
+function openModal(name){ curModal=name; renderAdmin(); }
+function closeModal(){ curModal=null; renderAdmin(); }
+
+function buildLinkModal(){
+  var ov=div("ov"); ov.addEventListener("click",function(e){ if(e.target===ov) closeModal(); });
+  var m=div("modal");
+  var mh=div("modal-head");
+  var h3=el("h3",""); h3.textContent="Create private view";
+  ap(mh, h3, mkBtn("","x-btn",closeModal,"x"));
+  var info=el("p",""); info.style.cssText="font-size:13px;color:var(--text2);margin-bottom:1rem;";
+  info.textContent=sel.length+" artwork"+(sel.length!==1?"s":"")+" selected — link opens on any device, no login needed.";
+  ap(m,mh,info);
+
+  var tInp=mkInput(lDraft.title,"e.g. Works by Ramesh Qadri — Autumn 2025",function(v){ lDraft.title=v; });
+  ap(m, mkField("View title *", tInp));
+  var bInp=mkInput(lDraft.buyer,"e.g. Mr Sharma",function(v){ lDraft.buyer=v; });
+  ap(m, mkField("Buyer name (optional)", bInp));
+
+  var eInp=el("input",""); eInp.type="date"; eInp.value=lDraft.expiry; eInp.style.width="100%";
+  eInp.addEventListener("change",function(){ lDraft.expiry=eInp.value; });
+  var exRow=div("exp-row");
+  [7,14,30,60,90].forEach(function(d){
+    exRow.appendChild(mkBtn(d+" days","",function(days){ lDraft.expiry=dplus(days); eInp.value=dplus(days); }.bind(null,d)));
+  });
+  var expWrap=div(""); ap(expWrap,eInp,exRow);
+  ap(m, mkField("Link expires on", expWrap));
+
+  var foot=div("modal-foot");
+  ap(foot, mkBtn("Cancel","btn-sm",closeModal));
+  ap(foot, mkBtn("Generate link","btn-sm btn-p",function(){
+    if(!lDraft.title.trim()){ showToast("Enter a view title",false); return; }
+    if(!sel.length){ showToast("Select at least one artwork",false); return; }
+    var selWorks=artworks.filter(function(a){ return sel.indexOf(a.id)!==-1; });
+    var viewData={ title:lDraft.title, buyer:lDraft.buyer, expiry:lDraft.expiry, artworks:selWorks };
+    var encoded=encodeView(viewData);
+    doneUrl=location.origin+location.pathname+"?v="+encoded;
+    sel=[]; lDraft={ title:"", buyer:"", expiry:dplus(30) };
+    curModal="done"; renderAdmin();
+  },"send"));
+  ap(m,foot); ov.appendChild(m); return ov;
+}
+
+function buildDoneModal(){
+  var ov=div("ov"); ov.addEventListener("click",function(e){ if(e.target===ov){ curModal=null; doneUrl=""; renderAdmin(); } });
+  var m=div("modal");
+  var mh=div("modal-head");
+  var h3=el("h3",""); h3.textContent="Your private view link";
+  ap(mh,h3,mkBtn("","x-btn",function(){ curModal=null; doneUrl=""; renderAdmin(); },"x"));
+  var note=el("p",""); note.style.cssText="font-size:13px;color:var(--text2);margin-bottom:1rem;line-height:1.6;";
+  note.textContent="Copy this link and send to your buyer. It works on any phone or computer — no login needed.";
+  ap(m,mh,note);
+
+  var box=div("done-box");
+  var urlBox=div("done-url"); urlBox.textContent=doneUrl;
+  var copyBtn=mkBtn("Copy link","copy-big",function(){
+    navigator.clipboard.writeText(doneUrl)
+      .then(function(){ showToast("Link copied to clipboard"); })
+      .catch(function(){ window.prompt("Copy this link:",doneUrl); });
+  },"copy");
+  var waHref="https://wa.me/?text="+encodeURIComponent("Private artwork selection: "+doneUrl);
+  var waBtn=el("a","wa-big"); waBtn.href=waHref; waBtn.target="_blank";
+  ap(waBtn, mkIcon("brand-whatsapp","color:#25D366;font-size:16px;"), txt("Send via WhatsApp"));
+
+  ap(box,ap(el("p",""),txt("Your link:")),urlBox,copyBtn,waBtn);
+  ap(m,box);
+
+  var prev=el("a",""); prev.href=doneUrl; prev.target="_blank";
+  prev.style.cssText="font-size:12px;color:var(--text2);display:flex;align-items:center;gap:4px;margin-top:14px;justify-content:center;";
+  ap(prev,mkIcon("external-link"),txt("Preview buyer view"));
+  ap(m,prev); ov.appendChild(m); return ov;
+}
+
+function buildAddArtModal(){
+  var ov=div("ov"); ov.addEventListener("click",function(e){ if(e.target===ov) closeModal(); });
+  var m=div("modal");
+  var mh=div("modal-head"); var h3=el("h3",""); h3.textContent="Add artwork manually";
+  ap(mh,h3,mkBtn("","x-btn",closeModal,"x")); m.appendChild(mh);
+  [["title","Title *"],["artist","Artist"],["year","Year"],["medium","Medium"],["dimensions","Dimensions"],["category","Category"],["image","Image URL"]].forEach(function(p){
+    ap(m, mkField(p[1], mkInput(aDraft[p[0]],"",function(k,v){ aDraft[k]=v; }.bind(null,p[0]))));
+  });
+  var ta=el("textarea",""); ta.rows=3; ta.style.width="100%"; ta.value=aDraft.description||"";
+  ta.addEventListener("input",function(){ aDraft.description=ta.value; });
+  ap(m, mkField("Description",ta));
+  var foot=div("modal-foot");
+  ap(foot, mkBtn("Cancel","btn-sm",closeModal));
+  ap(foot, mkBtn("Add artwork","btn-sm btn-p",function(){
+    if(!(aDraft.title||"").trim()){ showToast("Title is required",false); return; }
+    artworks.unshift(Object.assign({id:uid()},aDraft));
+    aDraft={ title:"",artist:"",year:"",medium:"",dimensions:"",category:"",image:"",description:"" };
+    persist(); closeModal(); showToast("Artwork added"); renderAdmin();
+  }));
+  ap(m,foot); ov.appendChild(m); return ov;
+}
+
+/* ── lightbox ── */
+function buildLightbox(a, buyerMode, onEnquire){
+  var lb=div("lb");
+  var xb=el("button","lb-x"); xb.setAttribute("aria-label","Close"); xb.appendChild(mkIcon("x"));
+  function closeLb(){ if(buyerMode){ lb.remove(); } else { lbArtwork=null; renderAdmin(); } }
+  xb.addEventListener("click",closeLb);
+  lb.addEventListener("click",function(e){ if(e.target===lb) closeLb(); });
+  function escFn(e){ if(e.key==="Escape"){ closeLb(); document.removeEventListener("keydown",escFn); } }
+  document.addEventListener("keydown",escFn);
+  lb.appendChild(xb);
+  var inner=div("lb-inner");
+  var iw=div("lb-img-wrap");
+  if(a.image){
+    var img=el("img",""); img.src=a.image; img.alt=a.title;
+    img.onerror=function(){ iw.innerHTML=""; iw.appendChild(mkIcon("photo","font-size:40px;color:rgba(255,255,255,.3);")); };
+    iw.appendChild(img);
+  } else { iw.appendChild(mkIcon("photo","font-size:40px;color:rgba(255,255,255,.3);")); }
+  inner.appendChild(iw);
+  var info=div("lb-info");
+  var art=div("lb-artist"); art.textContent=a.artist||"";
+  var tl=div("lb-title"); tl.textContent=a.title;
+  ap(info,art,tl);
+  [["Year",a.year],["Medium",a.medium],["Dimensions",a.dimensions],["Category",a.category]].forEach(function(p){
+    if(!p[1]) return;
+    var row=div("lb-row");
+    var lbl=el("span","lb-label"); lbl.textContent=p[0];
+    var val=el("span","lb-val"); val.textContent=p[1];
+    ap(row,lbl,val); info.appendChild(row);
+  });
+  if(a.description){ var desc=el("p","lb-desc"); desc.textContent=a.description; info.appendChild(desc); }
+  if(buyerMode&&onEnquire){
+    var eb=el("button","lb-enq"); ap(eb,mkIcon("mail"),txt(" Enquire about this work"));
+    eb.addEventListener("click",function(){ lb.remove(); onEnquire(); }); info.appendChild(eb);
+  }
+  ap(inner,info); lb.appendChild(inner); return lb;
+}
+
+/* ── sync ── */
+function doSyncNew(){
+  syncMsg="Fetching from Google Sheets…"; renderAdmin();
+  fetch(CFG.sheet).then(function(r){
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    return r.text();
+  }).then(function(text){
+    var rows=parseCSV(text); if(!rows.length) throw new Error("No rows found.");
+    var existing={};
+    artworks.forEach(function(a){ existing[(a.title+"|"+(a.artist||"")).toLowerCase()]=true; });
+    var fresh=rows.filter(function(r){ return !existing[(r.title+"|"+(r.artist||"")).toLowerCase()]; });
+    artworks=artworks.concat(fresh); persist();
+    syncMsg="✓ "+rows.length+" total, "+fresh.length+" new added";
+    showToast(fresh.length+" new artworks added");
+    renderAdmin();
+  }).catch(function(err){
+    syncMsg=""; showToast("Could not load sheet: "+err.message,false); renderAdmin();
+  });
+}
+function doResync(){
+  syncMsg="Re-syncing…"; renderAdmin();
+  fetch(CFG.sheet).then(function(r){
+    if(!r.ok) throw new Error("HTTP "+r.status);
+    return r.text();
+  }).then(function(text){
+    var rows=parseCSV(text); if(!rows.length) throw new Error("No rows found.");
+    artworks=rows; sel=[]; persist();
+    syncMsg="✓ "+rows.length+" artworks loaded";
+    showToast("Re-synced — "+rows.length+" artworks");
+    renderAdmin();
+  }).catch(function(err){
+    syncMsg=""; showToast("Sync failed: "+err.message,false); renderAdmin();
+  });
+}
+
+/* ══ BUYER VIEW ═══════════════════════════════════════════════════════ */
+function renderBuyer(data){
+  root.innerHTML="";
+  var works=data.artworks||[];
+  var wrap=div("buyer-wrap");
+
+  /* nav */
+  var nav=div("buyer-nav");
+  var logoWrap=div("");
+  if(CFG.logoUrl){
+    var img=el("img",""); img.src=CFG.logoUrl; img.alt=CFG.gallery; img.style.height="40px"; logoWrap.appendChild(img);
+  } else {
+    var gn=div("gallery-name"); gn.textContent=CFG.gallery;
+    var gt=div("gallery-tag"); gt.textContent=CFG.tagline;
+    ap(logoWrap,gn,gt);
+  }
+  var nr=div("buyer-nav-right");
+  nr.innerHTML=works.length+" work"+(works.length!==1?"s":"")+"<br>Available until "+fmtDate(data.expiry);
+  ap(nav,logoWrap,nr); wrap.appendChild(nav);
+
+  /* hero */
+  var hero=div("buyer-hero");
+  var h1=el("h1",""); h1.textContent=data.title; hero.appendChild(h1);
+  if(data.buyer){ var bp=el("p",""); bp.textContent="Private selection for "+data.buyer; hero.appendChild(bp); }
+  wrap.appendChild(hero);
+
+  /* grid */
+  if(!works.length){
+    wrap.appendChild(buildEmpty("photo-off","No artworks","Please contact the gallery."));
+  } else {
+    var grid=div("buyer-grid");
+    works.forEach(function(a){
+      var card=div("");
+      var imgW=div("buyer-card-img");
+      if(a.image){
+        var img=el("img",""); img.src=a.image; img.alt=a.title;
+        img.onerror=function(){ imgW.innerHTML=""; imgW.appendChild(mkIcon("photo","font-size:36px;color:var(--text3);")); imgW.style.cursor="default"; };
+        imgW.appendChild(img);
+      } else { imgW.appendChild(mkIcon("photo","font-size:36px;color:var(--text3);")); imgW.style.cursor="default"; }
+      imgW.addEventListener("click",function(artwork){
+        wrap.appendChild(buildLightbox(artwork,true,function(){ wrap.appendChild(buildInquiry(artwork,wrap)); }));
+      }.bind(null,a));
+      var bdy=div("");
+      var bart=div("b-artist"); bart.textContent=a.artist||"";
+      var btl=div("b-title"); btl.textContent=a.title;
+      var bmt=div("b-meta"); bmt.textContent=[a.medium,a.dimensions,a.year].filter(Boolean).join(" · ");
+      var enq=el("button","btn-enq"); enq.textContent="Enquire";
+      enq.addEventListener("click",function(artwork){ wrap.appendChild(buildInquiry(artwork,wrap)); }.bind(null,a));
+      ap(bdy,bart,btl,bmt,enq);
+      ap(card,imgW,bdy); grid.appendChild(card);
+    });
+    wrap.appendChild(grid);
+  }
+
+  /* footer */
+  var footer=div("buyer-footer");
+  var fn=div("footer-name"); fn.textContent=CFG.gallery;
+  var fc=el("p","footer-copy"); fc.innerHTML="Courtesy of "+CFG.gallery+". Copyright &copy; the Artists.<br>All works subject to prior sale. Prices available on enquiry.";
+  var fbtns=div("footer-btns");
+  var wbtn=el("a","footer-btn"); wbtn.href="https://wa.me/"+CFG.whatsapp; wbtn.target="_blank";
+  ap(wbtn,mkIcon("brand-whatsapp","color:#25D366;font-size:16px;"),txt("WhatsApp us"));
+  var ebtn=el("a","footer-btn"); ebtn.href="mailto:"+CFG.email;
+  ap(ebtn,mkIcon("mail","font-size:16px;"),txt("Email gallery"));
+  ap(fbtns,wbtn,ebtn); ap(footer,fn,fc,fbtns);
+  wrap.appendChild(footer);
+  root.appendChild(wrap);
+}
+
+function buildInquiry(a,container){
+  var waMsg=encodeURIComponent("Hello, I'm interested in \""+a.title+"\" by "+(a.artist||"")+(a.year?" ("+a.year+")")+" Could you please share details?");
+  var sub=encodeURIComponent("Enquiry — \""+a.title+"\" by "+(a.artist||""));
+  var body=encodeURIComponent("Dear "+CFG.gallery+",\n\nI would like to enquire about:\n\nTitle: "+a.title+"\nArtist: "+(a.artist||"")+(a.year?"\nYear: "+a.year:"")+(a.medium?"\nMedium: "+a.medium:"")+"\n\nKindly share details at your convenience.\n\nThank you.");
+  var ov=div("ov"); ov.addEventListener("click",function(e){ if(e.target===ov) ov.remove(); });
+  var m=div("modal");
+  var mh=div("modal-head");
+  var h3=el("h3",""); h3.textContent="Enquire about this work";
+  ap(mh,h3,mkBtn("","x-btn",function(){ ov.remove(); },"x")); m.appendChild(mh);
+  if(a.image){ var thumb=el("img","inq-thumb"); thumb.src=a.image; thumb.alt=a.title; thumb.onerror=function(){ thumb.remove(); }; m.appendChild(thumb); }
+  var atl=el("p",""); atl.style.cssText="font-family:'Cormorant Garamond',serif;font-size:17px;margin-bottom:2px;"; atl.textContent=a.title;
+  var asb=el("p",""); asb.style.cssText="font-size:13px;color:var(--text2);margin-bottom:1.25rem;"; asb.textContent=(a.artist||"")+(a.year?", "+a.year:"")+(a.medium?" · "+a.medium:"");
+  ap(m,atl,asb);
+  var waRow=el("a","c-row"); waRow.href="https://wa.me/"+CFG.whatsapp+"?text="+waMsg; waRow.target="_blank";
+  var waIc=div("c-icon wa"); waIc.appendChild(mkIcon("brand-whatsapp"));
+  var waInfo=div(""); var waLbl=div("c-label"); waLbl.textContent="WhatsApp"; var waSub=div("c-sub"); waSub.textContent="Message us instantly";
+  ap(waInfo,waLbl,waSub);
+  ap(waRow,waIc,waInfo,mkIcon("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"));
+  var emRow=el("a","c-row"); emRow.href="mailto:"+CFG.email+"?subject="+sub+"&body="+body;
+  var emIc=div("c-icon em"); emIc.appendChild(mkIcon("mail"));
+  var emInfo=div(""); var emLbl=div("c-label"); emLbl.textContent="Email gallery"; var emSub=div("c-sub"); emSub.textContent=CFG.email;
+  ap(emInfo,emLbl,emSub);
+  ap(emRow,emIc,emInfo,mkIcon("chevron-right","font-size:16px;color:var(--text3);margin-left:auto;"));
+  var note=el("p",""); note.style.cssText="font-size:11px;color:var(--text3);text-align:center;margin-top:14px;"; note.textContent="We respond within one business day.";
+  ap(m,waRow,emRow,note); ov.appendChild(m); return ov;
+}
+
+/* ── gate / empty ── */
+function renderGate(cls,msg){
+  root.innerHTML="";
+  var g=div("gate");
+  var gi=el("i",""); gi.className="ti "+cls; gi.setAttribute("aria-hidden","true"); gi.style.cssText="font-size:48px;color:var(--text3);";
+  var gh=el("h2",""); gh.textContent=msg;
+  var gp=el("p",""); gp.textContent="Please contact the gallery for assistance.";
+  ap(g,gi,gh,gp); root.appendChild(g);
+}
+function buildEmpty(icon,title,sub){
+  var d=div("empty");
+  d.appendChild(mkIcon(icon,"font-size:38px;display:block;margin-bottom:12px;"));
+  var t=div("empty-t"); t.textContent=title;
+  var s=el("p",""); s.textContent=sub;
+  ap(d,t,s); return d;
+}
+</script>
+</body>
+</html>
